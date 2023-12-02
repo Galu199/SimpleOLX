@@ -28,4 +28,3 @@ namespace SimpleOLX.Models
 		public virtual ICollection<Advert> AdvertsWatched { get; set; }
 	}
 }
-}

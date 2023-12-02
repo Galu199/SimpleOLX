@@ -15,10 +15,8 @@ namespace SimpleOLX.Models
 		public string Category { get; set; }
 		public float Price { get; set; }
 		public byte[] Image { get; set; }
-		public double LocalizationLatitude { get; set; }
-		public double LocalizationLongitude { get; set; }
-		public double Latitute { get; set; }
-		public double Longitute { get; set; }
+		public float LocalizationLatitude { get; set; }
+		public float LocalizationLongitude { get; set; }
 		public DateTime CreationTime { get; set; }
 
 		//FOREIGN KEYS
