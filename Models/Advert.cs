@@ -1,30 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using SimpleOLX.Models.Enums;
 
 namespace SimpleOLX.Models
 {
-	[Table("Adverts", Schema = "OLX")]
 	public class Advert
 	{
-		[Key]
 		public int Id { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
 		public string Mail { get; set; }
 		public string PhoneNumber { get; set; }
-		public string Category { get; set; }
+		public AdvertCategoryEnum Category { get; set; }
 		public float Price { get; set; }
 		public byte[] Image { get; set; }
 		public float LocalizationLatitude { get; set; }
 		public float LocalizationLongitude { get; set; }
-		public DateTime CreationTime { get; set; }
+		public DateTime CreationDate { get; set; }
+		public int UserOwnerId { get; set; }
 
-		//FOREIGN KEYS
-		[ForeignKey("UserOwner")]
-		public virtual int UserOwnerId { get; set; }
-		public virtual User UserOwner { get; set; }
-
-		[InverseProperty("AdvertsWatched")]
-		public virtual ICollection<User> UsersWatching { get; set; }
+        //Navigation properties
+        public User UserOwner { get; set; }
+		public ICollection<User> UsersWatchers { get; set; }
 	}
 }
