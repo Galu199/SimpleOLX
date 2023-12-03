@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SimpleOLX.Models;
 
 namespace SimpleOLX
 {
-    public class SimpleOLXDbContext : DbContext
+    public class SimpleOLXDbContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         protected readonly IConfiguration _configuration;
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Advert> Adverts { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
@@ -19,14 +19,13 @@ namespace SimpleOLX
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<User>(entityBuilder =>
             {
-                entityBuilder.HasKey(userEntity => userEntity.Id);
                 entityBuilder.Property(userEntity => userEntity.FirstName).IsRequired(true);
                 entityBuilder.Property(userEntity => userEntity.LastName).IsRequired(true);
-                entityBuilder.Property(userEntity => userEntity.Username).IsRequired(true);
                 entityBuilder.Property(userEntity => userEntity.CreationDate).IsRequired(true);
-                entityBuilder.Property(userEntity => userEntity.PasswordHash).IsRequired(true);
             });
 
             modelBuilder.Entity<Advert>(entityBuilder =>
@@ -74,11 +73,15 @@ namespace SimpleOLX
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
+            base.ConfigureConventions(configurationBuilder);
+
             configurationBuilder.Properties<Enum>().HaveConversion<string>();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            base.OnConfiguring(optionsBuilder);
+
             optionsBuilder.UseSqlite(_configuration.GetConnectionString("SimpleOLXDatabase"));
         }
     }
