@@ -9,8 +9,7 @@ namespace SimpleOLX.Models
 		public DateTime CreationDate { get; set; }
 
 		//Navigation properties
-		public ICollection<RefreshToken> RefreshTokens { get; set; }
+		//public ICollection<RefreshToken> RefreshTokens { get; set; }
 		public ICollection<Advert> AdvertsOwned { get; set; }
-		public ICollection<Advert> AdvertsWatched { get; set; }
 	}
 }

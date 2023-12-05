@@ -15,10 +15,9 @@ namespace SimpleOLX.Models
 		public float LocalizationLatitude { get; set; }
 		public float LocalizationLongitude { get; set; }
 		public DateTime CreationDate { get; set; }
-		public int UserOwnerId { get; set; }
 
         //Navigation properties
+		public int UserOwnerId { get; set; }
         public User UserOwner { get; set; }
-		public ICollection<User> UsersWatchers { get; set; }
 	}
 }

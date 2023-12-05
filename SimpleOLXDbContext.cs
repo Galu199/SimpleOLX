@@ -10,7 +10,7 @@ namespace SimpleOLX
         protected readonly IConfiguration _configuration;
 
         public DbSet<Advert> Adverts { get; set; }
-        public DbSet<RefreshToken> RefreshTokens { get; set; }
+        //public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public SimpleOLXDbContext(IConfiguration configuration, DbContextOptions<SimpleOLXDbContext> options) : base(options)
         {
@@ -46,29 +46,26 @@ namespace SimpleOLX
                 entityBuilder.HasOne(advertEntity => advertEntity.UserOwner)
                              .WithMany(userEntity => userEntity.AdvertsOwned)
                              .HasForeignKey(advertEntity => advertEntity.UserOwnerId);
-
-                entityBuilder.HasMany(advertEntity => advertEntity.UsersWatchers)
-                             .WithMany(userEntity => userEntity.AdvertsWatched);
             });
 
-            modelBuilder.Entity<RefreshToken>(entityBuilder =>
-            {
-                entityBuilder.HasKey(refreshTokenEntity => refreshTokenEntity.Id);
-                entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.Value).IsRequired(true);
-                entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.ExpiryDate).IsRequired(true);
-                entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.CreationDate).IsRequired(true);
-                entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.RevocationDate).IsRequired(false);
-                entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.RevocationDate).IsRequired(true);
-                entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.CreatedByIp).IsRequired(true);
-                entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.RevokedByIp).IsRequired(true);
-                entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.ReplacedByToken).IsRequired(true);
-                entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.ReasonRevoked).IsRequired(true);
-                entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.UserId).IsRequired(true);
+            //modelBuilder.Entity<RefreshToken>(entityBuilder =>
+            //{
+            //    entityBuilder.HasKey(refreshTokenEntity => refreshTokenEntity.Id);
+            //    entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.Value).IsRequired(true);
+            //    entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.ExpiryDate).IsRequired(true);
+            //    entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.CreationDate).IsRequired(true);
+            //    entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.RevocationDate).IsRequired(false);
+            //    entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.RevocationDate).IsRequired(true);
+            //    entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.CreatedByIp).IsRequired(true);
+            //    entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.RevokedByIp).IsRequired(true);
+            //    entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.ReplacedByToken).IsRequired(true);
+            //    entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.ReasonRevoked).IsRequired(true);
+            //    entityBuilder.Property(refreshTokenEntity => refreshTokenEntity.UserId).IsRequired(true);
 
-                entityBuilder.HasOne(refreshTokenEntity => refreshTokenEntity.User)
-                             .WithMany(userEntity => userEntity.RefreshTokens)
-                             .HasForeignKey(refreshTokenEntity => refreshTokenEntity.UserId);
-            });
+            //    entityBuilder.HasOne(refreshTokenEntity => refreshTokenEntity.User)
+            //                 .WithMany(userEntity => userEntity.RefreshTokens)
+            //                 .HasForeignKey(refreshTokenEntity => refreshTokenEntity.UserId);
+            //});
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
