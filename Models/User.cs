@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SimpleOLX.Models.identity;
 
 namespace SimpleOLX.Models
 {
 	public class User : IdentityUser<int>
 	{
-        public string FirstName { get; set; }
+		public string FirstName { get; set; }
 		public string LastName { get; set; }
 		public DateTime CreationDate { get; set; }
 
