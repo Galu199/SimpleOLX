@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -21,13 +21,13 @@ export class LoginComponent {
     private router: Router
   ) { }
 
-  login() {
-    if (!this.loginForm.valid) {
-      return;
-    }
-    this.authService.login(this.loginForm.value).pipe(
-      tap(() => this.router.navigate(['../main-view']))
-    ).subscribe();
-  }
+  public login() : void {
+    if (!this.loginForm.valid) return;
+    
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (response: string) => { this.router.navigate(['../main-view']); },
+      error: (err: HttpErrorResponse) => {}
+    });
 
+  }
 }

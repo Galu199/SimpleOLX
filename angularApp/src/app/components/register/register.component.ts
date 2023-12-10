@@ -28,12 +28,11 @@ export class RegisterComponent {
   ) { }
 
   register() {
-    if (!this.registerForm.valid) {
-      return;
-    }
-    this.authService.register(this.registerForm.value).pipe(
-      tap(() => this.router.navigate(['../login']))
-    ).subscribe();
+    if (!this.registerForm.valid) return;
+    
+    //this.authService.register(this.registerForm.value).pipe(
+    //  tap(() => this.router.navigate(['../login']))
+    //).subscribe();
   }
 
 }
