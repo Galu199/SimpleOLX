@@ -1,6 +1,6 @@
-﻿using SimpleOLX.Models.Enums;
+﻿using SimpleOLX.Entities.Enums;
 
-namespace SimpleOLX.Models
+namespace SimpleOLX.Entities
 {
 	public class Advert
 	{

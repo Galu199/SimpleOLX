@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SimpleOLX.Models.identity;
 
-namespace SimpleOLX.Models
+namespace SimpleOLX.Entities
 {
 	public class User : IdentityUser<int>
 	{
