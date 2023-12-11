@@ -41,9 +41,10 @@ namespace SimpleOLX.Controllers
             {
                 FirstName = userRegisterDTO.FirstName,
                 LastName = userRegisterDTO.LastName,
-				UserName = "NULL",
+				UserName = userRegisterDTO.FirstName + userRegisterDTO.LastName,
                 Email = userRegisterDTO.Email.ToLower(),
-                EmailConfirmed = true
+                EmailConfirmed = true,
+				CreationDate = DateTime.Now,
             }, userRegisterDTO.Password);
 
 			if (result.Succeeded == false) return BadRequest(result.Errors);

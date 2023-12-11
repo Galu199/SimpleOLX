@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SimpleOLX.DTOs;
 using SimpleOLX.Entities;
 
 namespace SimpleOLX.Controllers
@@ -78,16 +79,30 @@ namespace SimpleOLX.Controllers
 		// POST: api/Adverts
 		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 		[HttpPost]
-		public async Task<ActionResult<Advert>> PostAdvert(Advert advert)
+		public async Task<ActionResult<Advert>> PostAdvert(AdvertAddDTO advert)
 		{
 			if (_context.Adverts == null)
 			{
 				return Problem("Entity set 'SimpleOLXDbContext.Adverts'  is null.");
 			}
-			_context.Adverts.Add(advert);
+			var newAdvert = new Advert()
+			{
+				Title = advert.Title,
+				Description = advert.Description,
+				Mail = advert.Mail,
+				PhoneNumber = advert.PhoneNumber,
+				Price = advert.Price,
+				LocalizationLatitude = advert.LocalizationLatitude,
+				LocalizationLongitude = advert.LocalizationLongitude,
+				Category = advert.Category,
+				Image = await Helpers.ImageConverter.ConvertIFormFileToByteArray(advert.Image),
+				UserOwnerId = advert.UserOwnerId,
+				CreationDate = DateTime.Now,
+			};
+			_context.Adverts.Add(newAdvert);
 			await _context.SaveChangesAsync();
 
-			return CreatedAtAction("GetAdvert", new { id = advert.Id }, advert);
+			return CreatedAtAction("GetAdvert", new { id = newAdvert.Id }, newAdvert);
 		}
 
 		// DELETE: api/Adverts/5

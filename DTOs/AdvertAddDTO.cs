@@ -1,10 +1,9 @@
 ﻿using SimpleOLX.Entities.Enums;
 
-namespace SimpleOLX.Entities
+namespace SimpleOLX.DTOs
 {
-	public class Advert
+	public class AdvertAddDTO
 	{
-		public int Id { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
 		public string Mail { get; set; }
@@ -13,11 +12,8 @@ namespace SimpleOLX.Entities
 		public float LocalizationLatitude { get; set; }
 		public float LocalizationLongitude { get; set; }
 		public AdvertCategoryEnum Category { get; set; }
-		public byte[] Image { get; set; }
-		public DateTime CreationDate { get; set; }
-
-        //Navigation properties
+		public IFormFile? Image { get; set; }
+		//Navigation properties
 		public int UserOwnerId { get; set; }
-        public User UserOwner { get; set; }
 	}
 }
