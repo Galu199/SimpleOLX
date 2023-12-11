@@ -6,7 +6,7 @@ import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
+  selector: 'register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })

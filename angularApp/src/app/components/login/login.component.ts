@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -26,7 +26,7 @@ export class LoginComponent {
       return;
     }
     this.authService.login(this.loginForm.value).pipe(
-      tap(() => this.router.navigate(['../main-view']))
+      tap(() => this.router.navigate(['../start']))
     ).subscribe();
   }
 

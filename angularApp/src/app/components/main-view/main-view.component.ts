@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { LOCALSTORAGE_TOKEN_KEY } from 'src/app/app.module';
+import {MatSidenav} from "@angular/material/sidenav";
 
 @Component({
   selector: 'main-view',
@@ -8,14 +9,10 @@ import { LOCALSTORAGE_TOKEN_KEY } from 'src/app/app.module';
   styleUrls: ['./main-view.component.scss']
 })
 export class MainViewComponent {
+  title = 'angularApp';
 
   constructor(
     private router: Router
   ) {}
-
-  logout() {
-    localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
-    this.router.navigate(['../../']);
-  }
 
 }

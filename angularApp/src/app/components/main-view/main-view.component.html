@@ -1,6 +1,16 @@
- <p>Main view works.</p>
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+<!--  <button style="width: 80px" (click)="start()">-->
+<!--    <mat-icon> list </mat-icon>-->
+<!--  </button>-->
+  <button class="topbar-button" style="width: 110px"  routerLink="/start">
+    <span> Angular App </span>
+  </button>
+</div>
 
-<a [routerLink]="['../register']">Go back to Register</a>
-<br>
-<br>
-<button mat-raised-button (click)="logout()">Logout</button>
+<div class="container">
+  <div class="content">
+    <router-outlet> </router-outlet>
+  </div>
+</div>
+
