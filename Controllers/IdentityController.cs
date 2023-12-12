@@ -57,11 +57,11 @@ namespace SimpleOLX.Controllers
 		public async Task<ActionResult<string>> Login(UserLoginDTO userLoginDTO)
 		{
 			var user = await _userManager.FindByEmailAsync(userLoginDTO.Email);
-			if (user is null) return Unauthorized("Invalid email or password.");
+			if (user is null) return BadRequest("Invalid email or password.");
 			if (user.EmailConfirmed == false) return Unauthorized("Email is unconfirmed.");
 
 			var result = await _signInManager.CheckPasswordSignInAsync(user, userLoginDTO.Password, false);
-			if (result.Succeeded == false) return Unauthorized("Invalid email or password.");
+			if (result.Succeeded == false) return BadRequest("Invalid email or password.");
 
             return _JWTService.CreateJWT(user);
 		}

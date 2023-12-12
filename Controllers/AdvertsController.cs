@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SimpleOLX.DTOs;
 using SimpleOLX.Entities;
@@ -7,6 +8,7 @@ namespace SimpleOLX.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Authorize]
 	public class AdvertsController : ControllerBase
 	{
 		private readonly SimpleOLXDbContext _context;

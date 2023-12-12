@@ -21,7 +21,7 @@ export class AuthService {
     private router: Router
   ) { }
 
-   public login(loginRequest: LoginRequest): Observable<string> {
+  public login(loginRequest: LoginRequest): Observable<string> {
     return this.httpService.post(environment.apiURL + "Identity/login", loginRequest, { 
         headers: { 'Content-Type': 'application/json'},
         responseType: 'text' 
