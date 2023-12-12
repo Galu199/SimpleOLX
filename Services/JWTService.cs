@@ -1,8 +1,8 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using SimpleOLX.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using SimpleOLX.Entities;
 
 namespace SimpleOLX.Services
 {
