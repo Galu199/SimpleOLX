@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { delay, Observable, of, Subscription, tap } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LoginRequest } from '../../model/interfaces';
+import { LoginRequest, RegisterRequest } from '../../model/interfaces';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
@@ -16,7 +16,7 @@ export class AuthService {
 
   constructor(
     private httpService: HttpClient,
-    private snackbar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private jwtService: JwtHelperService,
     private router: Router
   ) { }
@@ -35,7 +35,7 @@ export class AuthService {
             delay(this.jwtService.getTokenExpirationDate(token)!.getTime() - new Date().getTime())
             ).subscribe(() => {
               this.logout()
-              this.snackbar.open('Session timeout', 'Close', { duration: 2000, horizontalPosition: 'right', verticalPosition: 'top' })
+              this.snackBar.open('Session timeout', 'Close', { duration: 2000, horizontalPosition: 'right', verticalPosition: 'top' })
             }
           )
         }
@@ -47,5 +47,12 @@ export class AuthService {
     this.tokenSubscription.unsubscribe()
     localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY)
     this.router.navigate(['/login'])
+  }
+
+  public register(registerRequest: RegisterRequest) : Observable<string> {
+    return this.httpService.post(environment.apiURL + "Identity/register", registerRequest, { 
+      headers: { 'Content-Type': 'application/json'},
+      responseType: 'text'
+    });
   }
 }

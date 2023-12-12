@@ -25,7 +25,7 @@ export class LoginComponent {
     if (!this.loginForm.valid) return;
     
     this.authService.login(this.loginForm.value).subscribe({
-      next: (response: string) => { this.router.navigate(['../main-view']); },
+      next: (value: string) => { this.router.navigate(['../main-view']); },
       error: (err: HttpErrorResponse) => { console.log(err.message); }
     });
 
