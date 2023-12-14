@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SimpleOLX.DTOs;
 using SimpleOLX.Entities;
+using System.Security.Claims;
 
 namespace SimpleOLX.Controllers
 {
@@ -12,10 +14,12 @@ namespace SimpleOLX.Controllers
 	public class AdvertsController : ControllerBase
 	{
 		private readonly SimpleOLXDbContext _context;
+        private readonly SignInManager<User> _signInManager;
 
-		public AdvertsController(SimpleOLXDbContext context)
+        public AdvertsController(SimpleOLXDbContext context, SignInManager<User> signInManager)
 		{
 			_context = context;
+			_signInManager = signInManager;
 		}
 
 		// GET: api/Adverts
@@ -50,61 +54,71 @@ namespace SimpleOLX.Controllers
 		// PUT: api/Adverts/5
 		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 		[HttpPut("{id}")]
-		public async Task<IActionResult> PutAdvert(int id, Advert advert)
+		public async Task<IActionResult> PutAdvert(int id, AdvertDTO advertDTO)
 		{
-			if (id != advert.Id)
-			{
-				return BadRequest();
-			}
+            if (_context.Adverts == null)
+            {
+                return NotFound();
+            }
+            var advert = await _context.Adverts.FindAsync(id);
+            if (advert == null) return NotFound();
 
-			_context.Entry(advert).State = EntityState.Modified;
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+			if (advert.UserOwnerId.ToString() != userId) return Unauthorized("No access to edit this post");
 
-			try
+            MapAdvertDTOToAdvert(advertDTO, advert);
+
+            try
 			{
 				await _context.SaveChangesAsync();
 			}
-			catch (DbUpdateConcurrencyException)
+			catch (DbUpdateConcurrencyException a)
 			{
 				if (!AdvertExists(id))
 				{
 					return NotFound();
-				}
-				else
-				{
-					throw;
-				}
-			}
-
+                }
+                return BadRequest(a.Message);
+            }
 			return NoContent();
 		}
 
 		// POST: api/Adverts
 		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 		[HttpPost]
-		public async Task<ActionResult<Advert>> PostAdvert(AdvertAddDTO advert)
+		public async Task<ActionResult<Advert>> PostAdvert(AdvertDTO advertDTO)
 		{
 			if (_context.Adverts == null)
 			{
-				return Problem("Entity set 'SimpleOLXDbContext.Adverts'  is null.");
+				return Problem("Entity set 'SimpleOLXDbContext.Adverts' is null.");
 			}
-			var newAdvert = new Advert()
-			{
-				Title = advert.Title,
-				Description = advert.Description,
-				Mail = advert.Mail,
-				PhoneNumber = advert.PhoneNumber,
-				Price = advert.Price,
-				LocalizationLatitude = advert.LocalizationLatitude,
-				LocalizationLongitude = advert.LocalizationLongitude,
-				Category = advert.Category,
-				Image = await Helpers.ImageConverter.ConvertIFormFileToByteArray(advert.Image),
-				UserOwnerId = advert.UserOwnerId,
-				CreationDate = DateTime.Now,
-			};
-			_context.Adverts.Add(newAdvert);
-			await _context.SaveChangesAsync();
 
-			return CreatedAtAction("GetAdvert", new { id = newAdvert.Id }, newAdvert);
+            var advert = new Advert()
+            {
+                Title = advertDTO.Title,
+                Description = advertDTO.Description,
+                Mail = advertDTO.Mail,
+                PhoneNumber = advertDTO.PhoneNumber,
+                Price = advertDTO.Price,
+                LocalizationLatitude = advertDTO.LocalizationLatitude,
+                LocalizationLongitude = advertDTO.LocalizationLongitude,
+                Category = advertDTO.Category,
+                Image = await Helpers.ImageConverter.ConvertIFormFileToByteArray(advertDTO.Image),
+                UserOwnerId = advertDTO.UserOwnerId,
+                CreationDate = DateTime.Now,
+            };
+            _context.Adverts.Add(advert);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException a)
+            {
+                return BadRequest(a.Message);
+            }
+
+            return CreatedAtAction("GetAdvert", new { id = advert.Id }, advert);
 		}
 
 		// DELETE: api/Adverts/5
@@ -120,16 +134,34 @@ namespace SimpleOLX.Controllers
 			{
 				return NotFound();
 			}
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+			if (advert.UserOwnerId.ToString() != userId)
+			{
+				return Unauthorized("No access to delete this post");
+			}
 
-			_context.Adverts.Remove(advert);
+            _context.Adverts.Remove(advert);
 			await _context.SaveChangesAsync();
 
-			return NoContent();
+			return Ok();
 		}
 
 		private bool AdvertExists(int id)
 		{
 			return (_context.Adverts?.Any(e => e.Id == id)).GetValueOrDefault();
 		}
-	}
+
+        private void MapAdvertDTOToAdvert(AdvertDTO source, Advert destination)
+        {
+            destination.Title = source.Title;
+            destination.Description = source.Description;
+            destination.Mail = source.Mail;
+            destination.PhoneNumber = source.PhoneNumber;
+            destination.Price = source.Price;
+            destination.LocalizationLatitude = source.LocalizationLatitude;
+            destination.LocalizationLongitude = source.LocalizationLongitude;
+			destination.Category = source.Category;
+			if(source.Image!=null) destination.Image = Helpers.ImageConverter.ConvertIFormFileToByteArray(source.Image).Result;
+        }
+    }
 }
