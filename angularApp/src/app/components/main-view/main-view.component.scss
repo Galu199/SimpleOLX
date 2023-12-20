@@ -59,7 +59,7 @@ h2 {
     &:disabled{
       background: #002f34;
       color: #002f34;
-      cursor: not-allowed;
+      cursor: auto;
     }
     &.add-btn {
       width: 200px;
@@ -69,6 +69,11 @@ h2 {
       position: fixed;
       right: 250px;
       font-size: 18px;
+      &:disabled{
+        background: #002f34;
+        color: #002f34;
+        cursor: auto;
+      }
     }
     &.logout-btn {
       width: 80px;

@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'start', component: StartComponent },
   { path: 'add', component: AddAdwertComponent },
   { path: 'list', component: AdwertsListComponent },
-  { path: '**', redirectTo: 'login',pathMatch: 'full' }
+  { path: '**', redirectTo: 'start',pathMatch: 'full' }
 ];
 
 @NgModule({

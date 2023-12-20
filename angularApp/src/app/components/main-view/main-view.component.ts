@@ -9,13 +9,20 @@ import {LOCALSTORAGE_TOKEN_KEY} from "../../app.module";
 })
 export class MainViewComponent {
   title = 'angularApp';
-  isLogIn: boolean;
+  public isLogIn: boolean;
 
   constructor(
     private router: Router
   ) {
-    //TODO: chwolowo ustawione żeby było widać przycisk, docelowo trzeba sprawdzać czy zalogowany
-    this.isLogIn = true;
+    this.isLogIn = this.checkIfLogIn();
+  }
+
+  public checkIfLogIn():boolean{
+    if(localStorage.getItem(LOCALSTORAGE_TOKEN_KEY)){
+      return true;
+    }
+    else
+      return false;
   }
 
   openStartPage(){
@@ -24,6 +31,7 @@ export class MainViewComponent {
 
   logout(){
     localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
+    this.isLogIn = false;
     this.router.navigate(['login']);
   }
 

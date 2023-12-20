@@ -16,7 +16,7 @@
   <button class="login-btn" [disabled]="isLogIn" (click)="login()">
     <span> Log in </span>
   </button>
-  <mat-icon> account_circle </mat-icon>
+    <mat-icon *ngIf="isLogIn"> account_circle </mat-icon>
 </div>
 
 <div class="container">
