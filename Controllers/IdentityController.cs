@@ -1,102 +1,69 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SimpleOLX.Models;
-using SimpleOLX.Models.identity;
+using Microsoft.EntityFrameworkCore;
+using SimpleOLX.DTOs;
+using SimpleOLX.Entities;
+using SimpleOLX.Services;
 
 namespace SimpleOLX.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class IdentityController : ControllerBase
 	{
 		private readonly SimpleOLXDbContext _context;
 		private readonly UserManager<User> _userManager;
 		private readonly SignInManager<User> _signInManager;
+        private readonly JWTService _JWTService;
 
-		public IdentityController(SimpleOLXDbContext context,
+        public IdentityController(SimpleOLXDbContext context,
 			UserManager<User> userManager, 
-			SignInManager<User> signInManager)
+			SignInManager<User> signInManager,
+			JWTService JWTService)
 		{
 			_context = context;
 			_userManager = userManager;
 			_signInManager = signInManager;
-		}
+            _JWTService = JWTService;
+        }
 
-		[HttpPost("register")]
-		public async Task<ActionResult<User>> Register(UserRegister user)
+        [AllowAnonymous]
+        [HttpPost("register")]
+		public async Task<ActionResult> Register(UserRegisterDTO userRegisterDTO)
 		{
-			if (_context.Users == null)
+			if (await _userManager.Users.AnyAsync(user => user.Email == userRegisterDTO.Email.ToLower()))
 			{
-				return Problem("Entity set 'SimpleOLXDbContext.Users'  is null.");
+				return BadRequest("There already exists an account using the provided email.");
 			}
 
-			User newUser = new User()
-			{
-				FirstName = user.FirstName,
-				LastName = user.LastName,
-				Email = user.Email,
-			};
+			var result = await _userManager.CreateAsync(new User()
+            {
+                FirstName = userRegisterDTO.FirstName,
+                LastName = userRegisterDTO.LastName,
+				UserName = userRegisterDTO.FirstName + userRegisterDTO.LastName,
+                Email = userRegisterDTO.Email.ToLower(),
+                EmailConfirmed = true,
+				CreationDate = DateTime.UtcNow,
+            }, userRegisterDTO.Password);
 
-			var result = await _userManager.CreateAsync(newUser, user.Password);
+			if (result.Succeeded == false) return BadRequest(result.Errors);
 
-			if (result.Succeeded)
-			{
-				// User created successfully
-				await _context.SaveChangesAsync();
-				return Ok(newUser);
-			}
-			else
-			{
-				// Handle errors (e.g., display error messages)
-				var errors = new List<string>();
-
-				foreach (var error in result.Errors)
-				{
-					errors.Add(error.Description);
-				}
-
-				return BadRequest(errors);
-			}
-			
-
-			//return CreatedAtAction("GetUser", new { id = user.Id }, user);
-			
+			return Ok("Account created successfully.");
 		}
 
+		[AllowAnonymous]
 		[HttpPost("login")]
-		public async Task<ActionResult<string>> Login(UserLogin user)
+		public async Task<ActionResult<string>> Login(UserLoginDTO userLoginDTO)
 		{
-			// Assuming user is created and stored in 'user' variable
-			User tempUser = new User()
-			{
-				Email = user.Email
-			};
+			var user = await _userManager.FindByEmailAsync(userLoginDTO.Email);
+			if (user is null) return BadRequest("Invalid email or password.");
+			if (user.EmailConfirmed == false) return Unauthorized("Email is unconfirmed.");
 
-			var signInResult = await _signInManager.PasswordSignInAsync(tempUser, "password123", isPersistent: false, lockoutOnFailure: false);
+			var result = await _signInManager.CheckPasswordSignInAsync(user, userLoginDTO.Password, false);
+			if (result.Succeeded == false) return BadRequest("Invalid email or password.");
 
-			if (signInResult.Succeeded)
-			{
-				// User successfully signed in
-				// Redirect or return success response
-				return Ok("Very-Special-Token");
-			}
-			else
-			{
-				// Login failed
-				// Handle the failure (e.g., display error message)
-				return BadRequest("Invalid login attempt");
-			}
+            return _JWTService.CreateJWT(user);
 		}
-
-		[HttpGet]
-		public async Task<ActionResult<string>> Logout()
-		{
-			await _signInManager.SignOutAsync();
-			return Ok("User left the chat");
-		}
-
-		//public async Task<ActionResult<string>> GetToken()
-
 	}
 }

@@ -1,6 +1,6 @@
-﻿using SimpleOLX.Models.Enums;
+﻿using SimpleOLX.Entities.Enums;
 
-namespace SimpleOLX.Models
+namespace SimpleOLX.Entities
 {
 	public class Advert
 	{
@@ -9,11 +9,11 @@ namespace SimpleOLX.Models
 		public string Description { get; set; }
 		public string Mail { get; set; }
 		public string PhoneNumber { get; set; }
-		public AdvertCategoryEnum Category { get; set; }
 		public float Price { get; set; }
-		public byte[] Image { get; set; }
 		public float LocalizationLatitude { get; set; }
 		public float LocalizationLongitude { get; set; }
+		public AdvertCategoryEnum Category { get; set; }
+		public byte[] Image { get; set; }
 		public DateTime CreationDate { get; set; }
 
         //Navigation properties

@@ -1,8 +1,9 @@
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { HttpErrorResponse } from '@angular/common/http'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { CustomValidators } from '../../model/custom-validator';
 import { AuthService } from '../../services/auth-service/auth.service';
-import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,16 +25,21 @@ export class RegisterComponent {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) { }
 
-  register() {
-    if (!this.registerForm.valid) {
-      return;
-    }
-    this.authService.register(this.registerForm.value).pipe(
-      tap(() => this.router.navigate(['../login']))
-    ).subscribe();
+  public onRegister(): void {
+    if (!this.registerForm.valid) return;
+    
+    this.registerForm.removeControl('passwordConfirm');
+    this.authService.register(this.registerForm.value).subscribe({
+      next: (value: string) => {
+        this.snackBar.open(value, 'Close', { duration: 2000, horizontalPosition: 'right', verticalPosition: 'top' })
+        this.router.navigate(['../login']); 
+      },
+      error: (err: HttpErrorResponse) => { console.log(err.message); }
+    });
   }
 
 }

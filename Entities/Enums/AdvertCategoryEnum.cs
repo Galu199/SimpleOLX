@@ -1,4 +1,4 @@
-﻿namespace SimpleOLX.Models.Enums
+﻿namespace SimpleOLX.Entities.Enums
 {
     public enum AdvertCategoryEnum
     {
