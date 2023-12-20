@@ -1,11 +1,31 @@
-<div class="content" role="main">
-  <h2 i18n>Hello, World!</h2>
-  <h2> App</h2>
-  <p>This is GUI for olx. </p>
+<div>
 
-  <a [routerLink]="['../register']">Go back to Register</a>
-  <br>
-  <br>
-  <button mat-raised-button (click)="logout()">Logout</button>
+
+<!--  Wyszukiwanie-->
+
+  <mat-card class="search">
+    <mat-form-field appearance="outline">
+      <mat-icon matPrefix> search </mat-icon>
+      <mat-label>Znajdź coś dla siebie</mat-label>
+      <input matInput placeholder="Szukaj">
+    </mat-form-field>
+    <button>
+      <span> Szukaj </span>
+      <mat-icon matSuffix> search </mat-icon>
+    </button>
+  </mat-card>
+
+<!--  Kategorie-->
+  <mat-card >
+    <mat-card-title>Kategorie główne</mat-card-title>
+    <mat-card-content>
+      <button>
+        <span> Motoryzajca </span>
+      </button>
+      <button>
+        <span> Moda </span>
+      </button>
+    </mat-card-content>
+  </mat-card>
 
 </div>

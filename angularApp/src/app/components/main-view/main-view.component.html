@@ -3,14 +3,16 @@
 <!--  <button style="width: 80px" (click)="start()">-->
 <!--    <mat-icon> list </mat-icon>-->
 <!--  </button>-->
-  <button class="topbar-button" style="width: 110px"  routerLink="/start">
-    <span> Angular App </span>
+  <button class="logo-btn" (click)="openStartPage()">
+    <span> SimpleOLX </span>
   </button>
+  <button class="logout-btn" >
+    <span> Log out </span>
+  </button>
+  <mat-icon> account_circle </mat-icon>
 </div>
 
 <div class="container">
-  <div class="content">
     <router-outlet> </router-outlet>
-  </div>
 </div>
 

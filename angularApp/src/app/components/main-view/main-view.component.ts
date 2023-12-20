@@ -1,7 +1,5 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { LOCALSTORAGE_TOKEN_KEY } from 'src/app/app.module';
-import {MatSidenav} from "@angular/material/sidenav";
 
 @Component({
   selector: 'main-view',
@@ -14,5 +12,13 @@ export class MainViewComponent {
   constructor(
     private router: Router
   ) {}
+
+  openStartPage(){
+    this.router.navigate(['start']);
+  }
+
+  logout(){
+
+  }
 
 }
