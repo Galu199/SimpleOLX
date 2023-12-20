@@ -56,11 +56,33 @@ h2 {
     &:hover {
       color: #799497;
     }
-    &.logout-btn {
-      margin-left: auto;
-      width: 110px;
+    &:disabled{
+      background: #002f34;
+      color: #002f34;
+      cursor: not-allowed;
+    }
+    &.add-btn {
+      width: 200px;
       align-items: center;
-      margin-right: 150px;
+      background: white;
+      color: #002f34;
+      position: fixed;
+      right: 250px;
+      font-size: 18px;
+    }
+    &.logout-btn {
+      width: 80px;
+      align-items: center;
+      position: fixed;
+      right: 150px;
+      font-size: 14px;
+    }
+    &.login-btn {
+      width: 80px;
+      align-items: center;
+      position: fixed;
+      right: 50px;
+      font-size: 14px;
     }
     &.logo-btn {
       margin-left: 150px;
@@ -69,13 +91,12 @@ h2 {
       align-items: center;
       color: #23e5db;
     }
-    &.menu-btn {
-      width: 80px;
-    }
-    mat-icon {
-      font-size: 34px;
-      align-items: flex-start;
-    }
+  }
+  mat-icon {
+    font-size: 30px;
+    align-items: center;
+    position: fixed;
+    right: 10px;
   }
 }
 

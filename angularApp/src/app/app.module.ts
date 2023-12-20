@@ -18,6 +18,8 @@ import { MainViewComponent } from './components/main-view/main-view.component';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { StartComponent } from './components/start/start.component';
+import { AddAdwertComponent } from './components/add-adwert/add-adwert.component';
+import { AdwertsListComponent } from './components/adwerts-list/adwerts-list.component';
 
 
 // specify the key where the token is stored in the local storage
@@ -33,7 +35,9 @@ export function tokenGetter() {
     MainViewComponent,
     StartComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddAdwertComponent,
+    AdwertsListComponent
   ],
   imports: [
     BrowserModule,

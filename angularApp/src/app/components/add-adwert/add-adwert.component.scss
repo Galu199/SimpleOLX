@@ -1,48 +1,18 @@
 h2 {
-  margin: 8px 0;
+  margin: 50px 150px;
+  font-size: 34px;
 }
 p {
   margin: 0;
 }
 
-
-.search{
-  display: flex;
-  justify-content: center;
-  mat-form-field{
-    width: calc(100vw - 500px);
-    height: 60px;
-    margin-top: 10px;
-  }
-  button {
-    font-weight: 600;
-    background-color: #002f34;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    transition: all 0.2s ease-in-out;
-    height: 60px;
-    width: 100px;
-    cursor: pointer;
-    align-items: center;
-    &:hover {
-      color: #799497;
-    }
-  }
-}
-
 mat-card{
   margin: 30px 150px;
-
-
   mat-card-title,
   mat-card-content {
     display: flex;
-    justify-content: center;
-
+    justify-content: left;
+    margin: 20px;
   }
 
   button {

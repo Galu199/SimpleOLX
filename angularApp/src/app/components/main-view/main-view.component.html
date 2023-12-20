@@ -6,8 +6,15 @@
   <button class="logo-btn" (click)="openStartPage()">
     <span> SimpleOLX </span>
   </button>
-  <button class="logout-btn" >
+
+  <button class="add-btn" [disabled]="!isLogIn" (click)="add()">
+    <span>  Dodaj ogłoszenie</span>
+  </button>
+  <button class="logout-btn" [disabled]="!isLogIn" (click)="logout()">
     <span> Log out </span>
+  </button>
+  <button class="login-btn" [disabled]="isLogIn" (click)="login()">
+    <span> Log in </span>
   </button>
   <mat-icon> account_circle </mat-icon>
 </div>

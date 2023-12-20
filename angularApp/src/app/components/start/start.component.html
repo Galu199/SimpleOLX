@@ -9,7 +9,7 @@
       <mat-label>Znajdź coś dla siebie</mat-label>
       <input matInput placeholder="Szukaj">
     </mat-form-field>
-    <button>
+    <button (click)="search()">
       <span> Szukaj </span>
       <mat-icon matSuffix> search </mat-icon>
     </button>
@@ -19,7 +19,8 @@
   <mat-card >
     <mat-card-title>Kategorie główne</mat-card-title>
     <mat-card-content>
-      <button>
+      <button (click)="list()">
+        <mat-icon> directions_car</mat-icon>
         <span> Motoryzajca </span>
       </button>
       <button>

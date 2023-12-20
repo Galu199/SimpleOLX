@@ -16,10 +16,13 @@ export class StartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  search()
+  {
 
- logout() {
-    localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
-    this.router.navigate(['../../']);
+  }
+
+  list(){
+    this.router.navigate(['list']);
   }
 
 }
