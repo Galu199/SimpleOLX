@@ -1,6 +1,18 @@
- <p>Main view works.</p>
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+<!--  <button style="width: 80px" (click)="start()">-->
+<!--    <mat-icon> list </mat-icon>-->
+<!--  </button>-->
+  <button class="logo-btn" (click)="openStartPage()">
+    <span> SimpleOLX </span>
+  </button>
+  <button class="logout-btn" >
+    <span> Log out </span>
+  </button>
+  <mat-icon> account_circle </mat-icon>
+</div>
 
-<a [routerLink]="['../register']">Go back to Register</a>
-<br>
-<br>
-<button mat-raised-button (click)="logout()">Logout</button>
+<div class="container">
+    <router-outlet> </router-outlet>
+</div>
+

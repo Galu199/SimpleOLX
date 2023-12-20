@@ -28,6 +28,10 @@ mat-card {
       .button {
         display: flex;
         justify-content: flex-end;
+
+        &:hover {
+          color: #799497;
+        }
       }
     }
   }

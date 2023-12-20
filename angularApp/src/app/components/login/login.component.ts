@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth-service/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -21,11 +21,12 @@ export class LoginComponent {
     private router: Router
   ) { }
 
+
   public login() : void {
     if (!this.loginForm.valid) return;
     
     this.authService.login(this.loginForm.value).subscribe({
-      next: (value: string) => { this.router.navigate(['../main-view']); },
+      next: (value: string) => { this.router.navigate(['../start']); },
       error: (err: HttpErrorResponse) => { console.log(err.message); }
     });
 

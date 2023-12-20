@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -18,6 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MainViewComponent } from './components/main-view/main-view.component';
 
 import { JwtModule } from '@auth0/angular-jwt';
+import { StartComponent } from './components/start/start.component';
+
 
 // specify the key where the token is stored in the local storage
 export const LOCALSTORAGE_TOKEN_KEY = 'angularApp';
@@ -29,10 +30,10 @@ export function tokenGetter() {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    MainViewComponent,
+    StartComponent,
     LoginComponent,
-    RegisterComponent,
-    MainViewComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +58,6 @@ export function tokenGetter() {
     })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [MainViewComponent]
 })
 export class AppModule { }
