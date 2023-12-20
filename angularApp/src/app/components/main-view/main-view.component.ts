@@ -12,17 +12,19 @@ export class MainViewComponent {
   public isLogIn: boolean;
 
   constructor(
-    private router: Router
+    private router: Router,
+
   ) {
-    this.isLogIn = this.checkIfLogIn();
+    this.isLogIn = false;
   }
 
-  public checkIfLogIn():boolean{
+  public checkIfLogIn(){
+    //TODO: przeładowanie strony po zalogowaniu żeby przyciski się uaktywniły??
     if(localStorage.getItem(LOCALSTORAGE_TOKEN_KEY)){
-      return true;
+      this.isLogIn = true;
     }
     else
-      return false;
+      this.isLogIn = false;
   }
 
   openStartPage(){
