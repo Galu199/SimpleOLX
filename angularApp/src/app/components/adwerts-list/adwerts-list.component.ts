@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-adwerts-list',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdwertsListComponent implements OnInit {
 
-  constructor() { }
+  numberOfAdwerts: number =0;
+
+
+  constructor(
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+  }
+
+  search()
+  {
+
+  }
+
+  adwert(){
+    this.router.navigate(['start']);
   }
 
 }

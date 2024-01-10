@@ -1,1 +1,25 @@
-<p>adwerts-list works!</p>
+<div>
+  <!--  Wyszukiwanie-->
+
+  <mat-card class="search">
+    <mat-form-field appearance="outline">
+      <mat-icon matPrefix> search </mat-icon>
+      <mat-label>Znajdź coś dla siebie</mat-label>
+      <input matInput placeholder="Szukaj">
+    </mat-form-field>
+    <button (click)="search()">
+      <span> Szukaj </span>
+      <mat-icon matSuffix> search </mat-icon>
+    </button>
+  </mat-card>
+
+  <mat-card class="list">
+    <h2> Znaleźliśmy
+      <span *ngIf="numberOfAdwerts===0"> {{numberOfAdwerts}} ogłoszeń</span>
+      <span *ngIf="numberOfAdwerts===1"> {{numberOfAdwerts}} ogłoszenie</span>
+      <span *ngIf="numberOfAdwerts>1 && numberOfAdwerts<5"> {{numberOfAdwerts}} ogłoszenia</span>
+      <span *ngIf="numberOfAdwerts>5">{{numberOfAdwerts}} ogłoszeń</span>
+    </h2>
+
+  </mat-card>
+</div>
