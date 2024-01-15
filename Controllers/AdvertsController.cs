@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SimpleOLX.DTOs;
 using SimpleOLX.Entities;
+using SimpleOLX.Entities.Enums;
 using System.Security.Claims;
 
 namespace SimpleOLX.Controllers
@@ -24,7 +25,7 @@ namespace SimpleOLX.Controllers
 
 		// GET: api/Adverts
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<Advert>>> GetAdverts()
+		public async Task<ActionResult<List<Advert>>> GetAdverts()
 		{
 			if (_context.Adverts == null)
 			{
@@ -144,6 +145,24 @@ namespace SimpleOLX.Controllers
 			await _context.SaveChangesAsync();
 
 			return Ok();
+		}
+
+		[HttpGet("category/{category}")]
+		public async Task<ActionResult<List<AdvertDTOz>>> GetAdvertsByCategory(AdvertCategoryEnum category)
+		{
+			if (_context.Adverts == null) { return NotFound(); }
+			var adverts = await _context.Adverts.Where(a => a.Category == category).Select(a => new AdvertDTOz
+			{
+				Id = a.Id,
+				Description = a.Description,
+				Price = a.Price,
+				Title = a.Title,
+				Image = Helpers.ImageConverter.ConvertByteArrayToBase64String(a.Image),
+				LocalizationLatitude = a.LocalizationLatitude,
+				LocalizationLongitude = a.LocalizationLongitude,
+				UserOwnerId = a.UserOwnerId
+			}).ToListAsync();
+			return adverts;
 		}
 
 		private bool AdvertExists(int id)
