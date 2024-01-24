@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
@@ -14,21 +14,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { MainViewComponent } from './components/main-view/main-view.component';
 
-import { JwtModule } from '@auth0/angular-jwt';
 import { StartComponent } from './components/start/start.component';
 import { AddAdvertComponent } from './components/add-advert/add-advert.component';
 import { AdvertsListComponent } from './components/adverts-list/adverts-list.component';
-
+import { JwtInterceptor } from './components/interceptors/jwt.interceptor';
 
 // specify the key where the token is stored in the local storage
 export const LOCALSTORAGE_TOKEN_KEY = 'angularApp';
-
-// specify tokenGetter for the angular jwt package
-export function tokenGetter() {
-  return localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
-}
 
 @NgModule({
   declarations: [
@@ -54,14 +49,15 @@ export function tokenGetter() {
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:3000', 'localhost:8080']
-      }
-    })
+    MatSelectModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+     }
+  ],
   bootstrap: [MainViewComponent]
 })
 export class AppModule { }

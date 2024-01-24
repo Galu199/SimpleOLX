@@ -21,13 +21,13 @@ namespace SimpleOLX.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Advert>>> GetAdverts(string phraze)
+        public async Task<ActionResult<IEnumerable<Advert>>> GetAdverts(string phrase)
         {
-            if (_context.Adverts == null || phraze.IsNullOrEmpty())
+            if (_context.Adverts == null || phrase.IsNullOrEmpty())
             {
                 return NotFound(); // bad input
             }
-            var searchWords = phraze.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            var searchWords = phrase.Split(" ", StringSplitOptions.RemoveEmptyEntries);
             if (!searchWords.Any())
             {
                 return NotFound(); // No valid search words

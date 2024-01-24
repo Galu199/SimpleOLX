@@ -1,3 +1,4 @@
+import { AdvertCategory } from "./types";
 
 export interface RefreshToken {
   id: number;
@@ -36,10 +37,10 @@ export interface Advert{
   mail: string;
   phoneNumber: string;
   price: number;
-  localizationLatitude: string;
+  localizationLatitude: number;
   localizationLongitude: number;
-  category: string;
-  image: string;
+  category: AdvertCategory;
+  image: File;
   userOwnerId: number;
 }
 

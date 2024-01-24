@@ -13,14 +13,18 @@
         <p >Wpisz co najmniej 16 znaków</p>
       </mat-card-content>
 
-      <mat-card-content>
-        <mat-label class="odstep">Kategoria*</mat-label>
-        <input matInput formControlName="category" placeholder="wybierz kategorie">
-      </mat-card-content>
+    <mat-card-content>
+      <mat-label class="odstep">Kategoria*</mat-label>
+      <mat-select  formControlName="category" placeholder="wybierz kategorie">
+        <mat-option *ngFor="let advertCategory of allAdvertsCategories" [value]="advertCategory">
+          {{ advertCategory }}
+        </mat-option>
+      </mat-select>
+    </mat-card-content>
 
     <mat-card-content>
       <mat-label class="odstep">Cena*</mat-label>
-      <input matInput type="number" formControlName="price" placeholder="wybierz kategorie">
+      <input matInput type="number" formControlName="price" placeholder="wpisz cene">
     </mat-card-content>
     </mat-card>
 
@@ -29,12 +33,14 @@
       <mat-card-title>Zdjęcia</mat-card-title>
       <mat-card-content>
 
-        <input type="file" accept="image/*" (change)="onFileChange($event)" multiple>
+        <input type="file" accept="image/*" (change)="selectFiles($event)" multiple>
 
-        <div *ngFor="let image of selectedImages; let i = index">
-          <img  [src]="image" alt="Thumbnail" class="thumbnail">
+        <div *ngFor="let preview of previews; let i = index">
+          <img [src]="preview" alt="Thumbnail" class="thumbnail">
           <button class="remove_btn" type="button" (click)="removeImage(i)">Remove</button>
         </div>
+
+        
 
       </mat-card-content>
     </mat-card>

@@ -14,7 +14,7 @@ export class AdvertService {
 
   constructor(private httpService: HttpClient,
               private router: Router) {
-     this.getAdverts();
+     //this.getAdverts();
   }
 
   getAdverts(){
@@ -25,13 +25,12 @@ export class AdvertService {
                );
   }
 
-   postAdvert(newAdvert: Advert){
-    this.httpService.post(environment.apiURL + "Adverts",
-                newAdvert,
-                {responseType: 'text'}).pipe(
-                  tap(newA => console.log(newA)),
-                  catchError(this.handleError)
-                );
+   postAdvert(newAdvert: Advert) {
+    return this.httpService.post(environment.apiURL + "Adverts", newAdvert, {responseType: 'text'})
+    .pipe(
+      tap(newA => console.log(newA)),
+      catchError(this.handleError)
+    );
   }
 
    private handleError(err: HttpErrorResponse){

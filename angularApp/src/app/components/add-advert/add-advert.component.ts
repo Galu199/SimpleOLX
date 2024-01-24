@@ -1,7 +1,11 @@
+import { AuthService } from 'src/app/services/auth-service/auth.service'
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Advert } from '../../model/interfaces';
 import { AdvertService } from '../../services/advert/advert.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdvertCategory, allAdvertsCategories } from 'src/app/model/types';
 
 @Component({
   selector: 'app-add-advert',
@@ -10,12 +14,17 @@ import { AdvertService } from '../../services/advert/advert.service';
 })
 export class AddAdvertComponent implements OnInit {
 
-  selectedImages: File[] = [];
+  previews: string[] = []
+  selectedFiles?: FileList
+  selectedFileNames: string[] = []
+
   newAdvert: Advert | undefined;
+  allAdvertsCategories: AdvertCategory[] = [...allAdvertsCategories]
 
   constructor(private formBuilder: FormBuilder,
               private advertService: AdvertService,
-  ) { }
+              private snackBar: MatSnackBar,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -30,28 +39,39 @@ export class AddAdvertComponent implements OnInit {
   });
 
   // Function to handle file input change
-  onFileChange(event: any): void {
-    const files: FileList = event.target.files;
-    // Limit to 10 images
-    for (let i = 0; i < files.length && i < 10; i++) {
-      this.selectedImages.push(files[i]);
+  selectFiles(event: any): void {
+    this.selectedFiles = event.target.files
+    
+    if (this.selectedFiles && this.selectedFiles[0]) {
+      const numberOfFiles = this.selectedFiles.length
+
+      for (let i = 0; i < numberOfFiles; i++) {
+        const reader = new FileReader();
+
+        reader.onload = (e: any) => { this.previews.push(e.target.result) }
+
+        reader.readAsDataURL(this.selectedFiles[i]);
+
+        this.selectedFileNames.push(this.selectedFiles[i].name);
+      }
     }
-    // Display thumbnails
-    this.updateThumbnailDisplay();
+    //this.updateThumbnailDisplay();
   }
 
   // Function to remove a selected image
   removeImage(index: number): void {
-    this.selectedImages.splice(index, 1);
+    this.previews.splice(index, 1);
+    this.selectedFileNames.splice(index, 1);
+
     // Update display after removal
-    this.updateThumbnailDisplay();
+    //this.updateThumbnailDisplay();
   }
 
   // Function to update thumbnail display
-  private updateThumbnailDisplay(): void {
-    const imageUrls: string[] = this.selectedImages.map(image => window.URL.createObjectURL(image));
-    this.addAdvert.patchValue({ images: imageUrls }); // Update form control with image URLs
-  }
+  //private updateThumbnailDisplay(): void {
+    //const imageUrls: string[] = this.selectedFileNames.map(image => window.URL.createObjectURL(image));
+    //this.addAdvert.patchValue({ images: this.selectedFileNames }); // Update form control with image URLs
+  //}
 
   add() {
     const advert: Advert = {
@@ -60,13 +80,19 @@ export class AddAdvertComponent implements OnInit {
         mail: "hh",
         phoneNumber: "string",
         price: this.addAdvert.value.price,
-        localizationLatitude: this.addAdvert.value.localization,
-        localizationLongitude: 1,
+        localizationLatitude: 1, //float
+        localizationLongitude: 1, //float
         category: this.addAdvert.value.category,
-        image: "string",
-        userOwnerId: 1
+        image: this.selectedFiles![0],
+        userOwnerId: this.authService.getUserId()
     }
-    this.advertService.postAdvert(advert);
+    this.advertService.postAdvert(advert).subscribe({
+      next: (value: string) => {
+        this.snackBar.open(value, 'Close', { duration: 2000, horizontalPosition: 'right', verticalPosition: 'top' })
+      },
+      error: (err: HttpErrorResponse) => { console.log(err.message); }
+    });
+
     console.log(advert);
   }
 }

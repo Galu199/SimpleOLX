@@ -7,8 +7,15 @@ using SimpleOLX;
 using SimpleOLX.Entities;
 using SimpleOLX.Services;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers().AddJsonOptions(opts =>
+{
+    opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+}
+);
 
 // Add services to the container.
 builder.Services.AddDbContext<SimpleOLXDbContext>();

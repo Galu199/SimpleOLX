@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { CanActivate, Router, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private jwtService: JwtHelperService
+    private authService: AuthService
   ) { }
 
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
     //       then he can access the frontend route, but will not get any data from the backend)
     // --> then redirect to the base route and deny the routing
     // --> else return true and allow the routing
-    if (this.jwtService.isTokenExpired()) {
+    if (!this.authService.getToken()) {
       this.router.navigate(['']);
       return false;
     } else {
