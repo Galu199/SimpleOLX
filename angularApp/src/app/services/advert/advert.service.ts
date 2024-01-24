@@ -10,20 +10,28 @@ import {catchError, Observable, tap, throwError} from "rxjs";
 })
 export class AdvertService {
 
-  //adverts = new List<Advert>();
+  adverts : Advert[] = [];
 
   constructor(private httpService: HttpClient,
               private router: Router) {
-     this.getAdverts();
+      this.getAdverts();
   }
 
-  getAdverts(){
-    const adverts = this.httpService.get(environment.apiURL + "Adverts", {
-                   headers: { 'Content-Type': 'application/json'},
-                   responseType: 'text'
-                 }
-               );
+  getAdverts() {
+    this.httpService.get<Advert[]>(environment.apiURL + 'Adverts').subscribe(
+      (adverts: Advert[]) => {
+        this.adverts = adverts;
+      },
+      (error) => {
+        console.error('Wystąpił błąd podczas pobierania ogłoszeń: ', error);
+      }
+    );
   }
+
+  public getOneAdvert( id: number) : Observable<Advert> {
+    return this.httpService.get<Advert>(environment.apiURL + 'Adverts/' + id);
+  }
+
 
    postAdvert(newAdvert: Advert){
     this.httpService.post(environment.apiURL + "Adverts",
