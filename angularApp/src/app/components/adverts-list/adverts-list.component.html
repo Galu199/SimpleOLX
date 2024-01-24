@@ -21,5 +21,11 @@
       <span *ngIf="numberOfAdverts>5">{{numberOfAdverts}} ogłoszeń</span>
     </h2>
 
+     <div *ngFor="let item of adverts" >
+       <mat-card-content>
+         <advert-view> {{item}}</advert-view>
+       </mat-card-content>
+     </div>
+
   </mat-card>
 </div>

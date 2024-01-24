@@ -17,6 +17,10 @@ export class AdvertService {
       this.getAdverts();
   }
 
+  getAdvertsList(){
+    return this.adverts;
+  }
+
   getAdverts() {
     this.httpService.get<Advert[]>(environment.apiURL + 'Adverts').subscribe(
       (adverts: Advert[]) => {

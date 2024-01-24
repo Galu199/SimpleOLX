@@ -7,7 +7,7 @@
     <mat-form-field appearance="outline">
       <mat-icon matPrefix> search </mat-icon>
       <mat-label>Znajdź coś dla siebie</mat-label>
-      <input matInput placeholder="Szukaj">
+      <input matInput placeholder="Szukaj" [(ngModel)]="searchPhrase">
     </mat-form-field>
     <button (click)="search()">
       <span> Szukaj </span>
@@ -19,12 +19,29 @@
   <mat-card >
     <mat-card-title>Kategorie główne</mat-card-title>
     <mat-card-content>
-      <button (click)="list()">
-        <mat-icon> directions_car</mat-icon>
+      <button (click)="list()" style="background: lightskyblue;">
+        <mat-icon class="categories"> directions_car </mat-icon>
         <span> Motoryzajca </span>
       </button>
-      <button>
+      <button (click)="list()" style="background: greenyellow;">
+        <mat-icon class="categories"> home </mat-icon>
+        <span> Dom i ogród </span>
+      </button>
+      <button (click)="list()" style="background: yellow;">
+        <mat-icon class="categories"> business_center </mat-icon>
+        <span> Praca </span>
+      </button>
+      <button (click)="list()" style="background: mediumpurple;">
+        <mat-icon class="categories"> personal_video </mat-icon>
+        <span> Elektronika </span>
+      </button>
+      <button (click)="list()" style="background: pink;">
+        <mat-icon class="categories">shopping_basket</mat-icon>
         <span> Moda </span>
+      </button>
+      <button (click)="list()" style="background: orange;">
+        <mat-icon class="categories"> pets </mat-icon>
+        <span> Zwierzęta </span>
       </button>
     </mat-card-content>
   </mat-card>

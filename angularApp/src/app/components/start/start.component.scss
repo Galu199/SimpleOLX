@@ -48,24 +48,30 @@ mat-card{
   button {
     margin:10px 10px;
     font-weight: 600;
+    font-size: 16px;
     background-color: white;
     color: #002f34;
-    border-color: #002f34;
-    border-radius: 4px;
+    border: none;
+    border-radius: 100px;
     padding: 5px;
     display: flex;
     justify-content: center;
-    transition: all 0.2s ease-in-out;
-    height: 200px;
-    width: 200px;
+    //transition: all 0.2s ease-in-out;
+    height: 120px;
+    width: 120px;
     cursor: pointer;
+    flex-direction: column;
     align-items: center;
+    position: relative;
     &:hover {
       background: #002f34;
       color: white;
     }
-    mat-icon{
-      size: 60px;
+    .categories{
+      font-size: 50px;
+      margin-bottom: 30px;
+      margin-right: 25px;
+      margin-top: -15px;
     }
   }
 }

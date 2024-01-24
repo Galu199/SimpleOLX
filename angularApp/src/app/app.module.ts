@@ -20,6 +20,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { StartComponent } from './components/start/start.component';
 import { AddAdvertComponent } from './components/add-advert/add-advert.component';
 import { AdvertsListComponent } from './components/adverts-list/adverts-list.component';
+import { AdvertViewComponent } from './components/advert-view/advert-view.component';
 
 
 // specify the key where the token is stored in the local storage
@@ -37,7 +38,8 @@ export function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     AddAdvertComponent,
-    AdvertsListComponent
+    AdvertsListComponent,
+    AdvertViewComponent
   ],
   imports: [
     BrowserModule,
