@@ -21,6 +21,7 @@ import { StartComponent } from './components/start/start.component';
 import { AddAdvertComponent } from './components/add-advert/add-advert.component';
 import { AdvertsListComponent } from './components/adverts-list/adverts-list.component';
 import { JwtInterceptor } from './components/interceptors/jwt.interceptor';
+import { AdvertViewComponent } from './components/advert-view/advert-view.component';
 
 // specify the key where the token is stored in the local storage
 export const LOCALSTORAGE_TOKEN_KEY = 'angularApp';
@@ -32,7 +33,8 @@ export const LOCALSTORAGE_TOKEN_KEY = 'angularApp';
     LoginComponent,
     RegisterComponent,
     AddAdvertComponent,
-    AdvertsListComponent
+    AdvertsListComponent,
+    AdvertViewComponent
   ],
   imports: [
     BrowserModule,

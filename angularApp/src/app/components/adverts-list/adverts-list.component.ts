@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {SearchService} from "../../services/search/search.service";
+import {Advert} from "../../model/interfaces";
+import {AdvertService} from "../../services/advert/advert.service";
 
 @Component({
   selector: 'app-adverts-list',
@@ -10,17 +13,25 @@ export class AdvertsListComponent implements OnInit {
 
   numberOfAdverts: number =0;
 
+  findAdverts : Advert[] = [];
+  adverts : Advert[] = [];
+  searchPhrase: string = '';
 
-  constructor(
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
+  constructor( private router: Router,
+               private searchService: SearchService,
+               private advertService: AdvertService
+  ) {
+    this.adverts = this.advertService.getAdvertsList()
   }
 
-  search()
-  {
+  ngOnInit(): void {
 
+  }
+
+  search() {
+    this.searchService.getSearch(this.searchPhrase);
+    this.findAdverts =this.searchService.findAdverts;
+    console.log(this.findAdverts);
   }
 
   advert(){

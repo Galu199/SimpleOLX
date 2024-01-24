@@ -26,6 +26,7 @@ namespace SimpleOLX.Controllers
                 return NotFound();
             }
 
+            // Spatial - do sql geo przestrzenne
             var adverts = await _context.Adverts.ToListAsync();
             var advert = adverts.Where(x => CalculateDistance(x.LocalizationLatitude, x.LocalizationLongitude, targetLat, targetLon) <= radiusInMeters).ToList();
 
