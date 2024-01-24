@@ -1,0 +1,67 @@
+<div>
+  <h2>Dodaj ogłoszenie</h2>
+
+  <form [formGroup]="addAdvert" (ngSubmit)="add()">
+
+    <!-- Title and Category -->
+    <mat-card>
+      <mat-card-title>Im więcej, tym lepiej!</mat-card-title>
+
+      <mat-card-content>
+        <mat-label>Tytuł ogłoszenia*</mat-label>
+        <input matInput formControlName="title" placeholder="np. iPhone 11 na gwarancji">
+        <p >Wpisz co najmniej 16 znaków</p>
+      </mat-card-content>
+
+      <mat-card-content>
+        <mat-label class="odstep">Kategoria*</mat-label>
+        <input matInput formControlName="category" placeholder="wybierz kategorie">
+      </mat-card-content>
+
+    <mat-card-content>
+      <mat-label class="odstep">Cena*</mat-label>
+      <input matInput type="number" formControlName="price" placeholder="wybierz kategorie">
+    </mat-card-content>
+    </mat-card>
+
+    <!-- Zdjęcia -->
+    <mat-card>
+      <mat-card-title>Zdjęcia</mat-card-title>
+      <mat-card-content>
+
+        <input type="file" accept="image/*" (change)="onFileChange($event)" multiple>
+
+        <div *ngFor="let image of selectedImages; let i = index">
+          <img  [src]="image" alt="Thumbnail" class="thumbnail">
+          <button class="remove_btn" type="button" (click)="removeImage(i)">Remove</button>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Opis -->
+    <mat-card>
+      <mat-card-content>
+        <mat-label>Opis*</mat-label>
+        <textarea matInput formControlName="description" placeholder="Wpisz tu informacje, które byłyby ważne dla ciebie podczas przeglądania takiego ogłoszenia"></textarea>
+        <p >Wpisz co najmniej 40 znaków</p>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Lokalizacja -->
+    <mat-card>
+      <mat-card-content>
+        <mat-label>Lokalizacja*</mat-label>
+        <input matInput class="short_text" formControlName="localization" placeholder="Miejscowość">
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Zatwierdzenie -->
+    <mat-card>
+      <mat-card-content>
+        <button type="submit">Dodaj ogłoszenie</button>
+      </mat-card-content>
+    </mat-card>
+
+  </form>
+</div>

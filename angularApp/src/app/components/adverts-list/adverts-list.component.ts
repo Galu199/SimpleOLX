@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-adwerts-list',
-  templateUrl: './adwerts-list.component.html',
-  styleUrls: ['./adwerts-list.component.scss']
+  selector: 'app-adverts-list',
+  templateUrl: './adverts-list.component.html',
+  styleUrls: ['./adverts-list.component.scss']
 })
-export class AdwertsListComponent implements OnInit {
+export class AdvertsListComponent implements OnInit {
 
-  numberOfAdwerts: number =0;
+  numberOfAdverts: number =0;
 
 
   constructor(
@@ -23,7 +23,7 @@ export class AdwertsListComponent implements OnInit {
 
   }
 
-  adwert(){
+  advert(){
     this.router.navigate(['start']);
   }
 
