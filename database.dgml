@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Database" Label="SimpleOLXDatabase.db" Category="Database" Group="Expanded" />
+    <Node Id="Adverts" Label="Adverts" Category="Table" Group="Collapsed" />
+    <Node Id="Adverts_Id" Label="Id" Category="Field Primary" Description="bigint" />
+    <Node Id="Adverts_Title" Label="Title" Category="Field" Description="text" />
+    <Node Id="Adverts_Description" Label="Description" Category="Field" Description="text" />
+    <Node Id="Adverts_Mail" Label="Mail" Category="Field" Description="text" />
+    <Node Id="Adverts_PhoneNumber" Label="PhoneNumber" Category="Field" Description="text" />
+    <Node Id="Adverts_Category" Label="Category" Category="Field" Description="text" />
+    <Node Id="Adverts_Price" Label="Price" Category="Field" Description="real" />
+    <Node Id="Adverts_Image" Label="Image" Category="Field" Description="image" />
+    <Node Id="Adverts_LocalizationLatitude" Label="LocalizationLatitude" Category="Field" Description="real" />
+    <Node Id="Adverts_LocalizationLongitude" Label="LocalizationLongitude" Category="Field" Description="real" />
+    <Node Id="Adverts_CreationDate" Label="CreationDate" Category="Field" Description="text" />
+    <Node Id="Adverts_UserOwnerId" Label="UserOwnerId" Category="Field Foreign" Description="bigint" />
+    <Node Id="AspNetRoleClaims" Label="AspNetRoleClaims" Category="Table" Group="Collapsed" />
+    <Node Id="AspNetRoleClaims_Id" Label="Id" Category="Field Primary" Description="bigint" />
+    <Node Id="AspNetRoleClaims_RoleId" Label="RoleId" Category="Field Foreign" Description="bigint" />
+    <Node Id="AspNetRoleClaims_ClaimType" Label="ClaimType" Category="Field Optional" Description="text" />
+    <Node Id="AspNetRoleClaims_ClaimValue" Label="ClaimValue" Category="Field Optional" Description="text" />
+    <Node Id="AspNetRoles" Label="AspNetRoles" Category="Table" Group="Collapsed" />
+    <Node Id="AspNetRoles_Id" Label="Id" Category="Field Primary" Description="bigint" />
+    <Node Id="AspNetRoles_Name" Label="Name" Category="Field Optional" Description="text" />
+    <Node Id="AspNetRoles_NormalizedName" Label="NormalizedName" Category="Field Optional" Description="text" />
+    <Node Id="AspNetRoles_ConcurrencyStamp" Label="ConcurrencyStamp" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUserClaims" Label="AspNetUserClaims" Category="Table" Group="Collapsed" />
+    <Node Id="AspNetUserClaims_Id" Label="Id" Category="Field Primary" Description="bigint" />
+    <Node Id="AspNetUserClaims_UserId" Label="UserId" Category="Field Foreign" Description="bigint" />
+    <Node Id="AspNetUserClaims_ClaimType" Label="ClaimType" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUserClaims_ClaimValue" Label="ClaimValue" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUserLogins" Label="AspNetUserLogins" Category="Table" Group="Collapsed" />
+    <Node Id="AspNetUserLogins_LoginProvider" Label="LoginProvider" Category="Field Primary" Description="text" />
+    <Node Id="AspNetUserLogins_ProviderKey" Label="ProviderKey" Category="Field Primary" Description="text" />
+    <Node Id="AspNetUserLogins_ProviderDisplayName" Label="ProviderDisplayName" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUserLogins_UserId" Label="UserId" Category="Field Foreign" Description="bigint" />
+    <Node Id="AspNetUserRoles" Label="AspNetUserRoles" Category="Table" Group="Collapsed" />
+    <Node Id="AspNetUserRoles_UserId" Label="UserId" Category="Field Primary" Description="bigint" />
+    <Node Id="AspNetUserRoles_RoleId" Label="RoleId" Category="Field Primary" Description="bigint" />
+    <Node Id="AspNetUsers" Label="AspNetUsers" Category="Table" Group="Collapsed" />
+    <Node Id="AspNetUsers_Id" Label="Id" Category="Field Primary" Description="bigint" />
+    <Node Id="AspNetUsers_FirstName" Label="FirstName" Category="Field" Description="text" />
+    <Node Id="AspNetUsers_LastName" Label="LastName" Category="Field" Description="text" />
+    <Node Id="AspNetUsers_CreationDate" Label="CreationDate" Category="Field" Description="text" />
+    <Node Id="AspNetUsers_UserName" Label="UserName" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUsers_NormalizedUserName" Label="NormalizedUserName" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUsers_Email" Label="Email" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUsers_NormalizedEmail" Label="NormalizedEmail" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUsers_EmailConfirmed" Label="EmailConfirmed" Category="Field" Description="bigint" />
+    <Node Id="AspNetUsers_PasswordHash" Label="PasswordHash" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUsers_SecurityStamp" Label="SecurityStamp" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUsers_ConcurrencyStamp" Label="ConcurrencyStamp" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUsers_PhoneNumber" Label="PhoneNumber" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUsers_PhoneNumberConfirmed" Label="PhoneNumberConfirmed" Category="Field" Description="bigint" />
+    <Node Id="AspNetUsers_TwoFactorEnabled" Label="TwoFactorEnabled" Category="Field" Description="bigint" />
+    <Node Id="AspNetUsers_LockoutEnd" Label="LockoutEnd" Category="Field Optional" Description="text" />
+    <Node Id="AspNetUsers_LockoutEnabled" Label="LockoutEnabled" Category="Field" Description="bigint" />
+    <Node Id="AspNetUsers_AccessFailedCount" Label="AccessFailedCount" Category="Field" Description="bigint" />
+    <Node Id="AspNetUserTokens" Label="AspNetUserTokens" Category="Table" Group="Collapsed" />
+    <Node Id="AspNetUserTokens_UserId" Label="UserId" Category="Field Primary" Description="bigint" />
+    <Node Id="AspNetUserTokens_LoginProvider" Label="LoginProvider" Category="Field Primary" Description="text" />
+    <Node Id="AspNetUserTokens_Name" Label="Name" Category="Field Primary" Description="text" />
+    <Node Id="AspNetUserTokens_Value" Label="Value" Category="Field Optional" Description="text" />
+  </Nodes>
+  <Links>
+    <Link Source="Database" Target="Adverts" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_Id" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_Title" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_Description" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_Mail" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_PhoneNumber" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_Category" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_Price" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_Image" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_LocalizationLatitude" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_LocalizationLongitude" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_CreationDate" Category="Contains" />
+    <Link Source="Adverts" Target="Adverts_UserOwnerId" Category="Contains" />
+    <Link Source="Adverts_UserOwnerId" Target="AspNetUsers_Id" Label="FK_Adverts_0_0" Category="Foreign Key" />
+    <Link Source="Database" Target="AspNetRoleClaims" Category="Contains" />
+    <Link Source="AspNetRoleClaims" Target="AspNetRoleClaims_Id" Category="Contains" />
+    <Link Source="AspNetRoleClaims" Target="AspNetRoleClaims_RoleId" Category="Contains" />
+    <Link Source="AspNetRoleClaims" Target="AspNetRoleClaims_ClaimType" Category="Contains" />
+    <Link Source="AspNetRoleClaims" Target="AspNetRoleClaims_ClaimValue" Category="Contains" />
+    <Link Source="AspNetRoleClaims_RoleId" Target="AspNetRoles_Id" Label="FK_AspNetRoleClaims_0_0" Category="Foreign Key" />
+    <Link Source="Database" Target="AspNetRoles" Category="Contains" />
+    <Link Source="AspNetRoles" Target="AspNetRoles_Id" Category="Contains" />
+    <Link Source="AspNetRoles" Target="AspNetRoles_Name" Category="Contains" />
+    <Link Source="AspNetRoles" Target="AspNetRoles_NormalizedName" Category="Contains" />
+    <Link Source="AspNetRoles" Target="AspNetRoles_ConcurrencyStamp" Category="Contains" />
+    <Link Source="Database" Target="AspNetUserClaims" Category="Contains" />
+    <Link Source="AspNetUserClaims" Target="AspNetUserClaims_Id" Category="Contains" />
+    <Link Source="AspNetUserClaims" Target="AspNetUserClaims_UserId" Category="Contains" />
+    <Link Source="AspNetUserClaims" Target="AspNetUserClaims_ClaimType" Category="Contains" />
+    <Link Source="AspNetUserClaims" Target="AspNetUserClaims_ClaimValue" Category="Contains" />
+    <Link Source="AspNetUserClaims_UserId" Target="AspNetUsers_Id" Label="FK_AspNetUserClaims_0_0" Category="Foreign Key" />
+    <Link Source="Database" Target="AspNetUserLogins" Category="Contains" />
+    <Link Source="AspNetUserLogins" Target="AspNetUserLogins_LoginProvider" Category="Contains" />
+    <Link Source="AspNetUserLogins" Target="AspNetUserLogins_ProviderKey" Category="Contains" />
+    <Link Source="AspNetUserLogins" Target="AspNetUserLogins_ProviderDisplayName" Category="Contains" />
+    <Link Source="AspNetUserLogins" Target="AspNetUserLogins_UserId" Category="Contains" />
+    <Link Source="AspNetUserLogins_UserId" Target="AspNetUsers_Id" Label="FK_AspNetUserLogins_0_0" Category="Foreign Key" />
+    <Link Source="Database" Target="AspNetUserRoles" Category="Contains" />
+    <Link Source="AspNetUserRoles" Target="AspNetUserRoles_UserId" Category="Contains" />
+    <Link Source="AspNetUserRoles" Target="AspNetUserRoles_RoleId" Category="Contains" />
+    <Link Source="AspNetUserRoles_UserId" Target="AspNetUsers_Id" Label="FK_AspNetUserRoles_0_0" Category="Foreign Key" />
+    <Link Source="AspNetUserRoles_RoleId" Target="AspNetRoles_Id" Label="FK_AspNetUserRoles_1_0" Category="Foreign Key" />
+    <Link Source="Database" Target="AspNetUsers" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_Id" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_FirstName" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_LastName" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_CreationDate" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_UserName" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_NormalizedUserName" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_Email" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_NormalizedEmail" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_EmailConfirmed" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_PasswordHash" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_SecurityStamp" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_ConcurrencyStamp" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_PhoneNumber" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_PhoneNumberConfirmed" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_TwoFactorEnabled" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_LockoutEnd" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_LockoutEnabled" Category="Contains" />
+    <Link Source="AspNetUsers" Target="AspNetUsers_AccessFailedCount" Category="Contains" />
+    <Link Source="Database" Target="AspNetUserTokens" Category="Contains" />
+    <Link Source="AspNetUserTokens" Target="AspNetUserTokens_UserId" Category="Contains" />
+    <Link Source="AspNetUserTokens" Target="AspNetUserTokens_LoginProvider" Category="Contains" />
+    <Link Source="AspNetUserTokens" Target="AspNetUserTokens_Name" Category="Contains" />
+    <Link Source="AspNetUserTokens" Target="AspNetUserTokens_Value" Category="Contains" />
+    <Link Source="AspNetUserTokens_UserId" Target="AspNetUsers_Id" Label="FK_AspNetUserTokens_0_0" Category="Foreign Key" />
+  </Links>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Table" ValueLabel="True">
+      <Condition Expression="HasCategory('Table')" />
+      <Setter Property="Background" Value="#FFC0C0C0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Schema" ValueLabel="True">
+      <Condition Expression="HasCategory('Schema')" />
+      <Setter Property="Background" Value="#FF7F9169" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Primary" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Primary')" />
+      <Setter Property="Background" Value="#FF008000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Optional" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Optional')" />
+      <Setter Property="Background" Value="#FF808040" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field Foreign" ValueLabel="True">
+      <Condition Expression="HasCategory('Field Foreign')" />
+      <Setter Property="Background" Value="#FF8080FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Field" ValueLabel="True">
+      <Condition Expression="HasCategory('Field')" />
+      <Setter Property="Background" Value="#FFC0A000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Database" ValueLabel="True">
+      <Condition Expression="HasCategory('Database')" />
+      <Setter Property="Background" Value="#FFFFFFFF" />
+    </Style>
+  </Styles>
+</DirectedGraph>
