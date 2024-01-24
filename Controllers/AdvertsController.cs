@@ -148,6 +148,7 @@ namespace SimpleOLX.Controllers
 		}
 
 		[HttpGet("category/{category}")]
+		[AllowAnonymous]
 		public async Task<ActionResult<List<AdvertDTOz>>> GetAdvertsByCategory(AdvertCategoryEnum category)
 		{
 			if (_context.Adverts == null) { return NotFound(); }
