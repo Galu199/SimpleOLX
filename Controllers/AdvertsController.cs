@@ -147,25 +147,6 @@ namespace SimpleOLX.Controllers
 			return Ok();
 		}
 
-		[HttpGet("category/{category}")]
-		[AllowAnonymous]
-		public async Task<ActionResult<List<AdvertDTOz>>> GetAdvertsByCategory(AdvertCategoryEnum category)
-		{
-			if (_context.Adverts == null) { return NotFound(); }
-			var adverts = await _context.Adverts.Where(a => a.Category == category).Select(a => new AdvertDTOz
-			{
-				Id = a.Id,
-				Description = a.Description,
-				Price = a.Price,
-				Title = a.Title,
-				Image = Helpers.ImageConverter.ConvertByteArrayToBase64String(a.Image),
-				LocalizationLatitude = a.LocalizationLatitude,
-				LocalizationLongitude = a.LocalizationLongitude,
-				UserOwnerId = a.UserOwnerId
-			}).ToListAsync();
-			return adverts;
-		}
-
 		private bool AdvertExists(int id)
 		{
 			return (_context.Adverts?.Any(e => e.Id == id)).GetValueOrDefault();
