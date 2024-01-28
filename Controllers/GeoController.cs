@@ -27,6 +27,7 @@ namespace SimpleOLX.Controllers
             }
 
             // Spatial - do sql geo przestrzenne
+            // jest roszczerzenie spatialite ale wymagało by to przebudowania bazy danych, modeli, kontrolerów i fronta.
             var adverts = await _context.Adverts.ToListAsync();
             var advert = adverts.Where(x => CalculateDistance(x.LocalizationLatitude, x.LocalizationLongitude, targetLat, targetLon) <= radiusInMeters).ToList();
 
