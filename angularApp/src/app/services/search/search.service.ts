@@ -42,8 +42,7 @@ export class SearchService {
     let allCategories: AdvertCategory[] = [...allAdvertsCategories]
     const params = new HttpParams().set('category', allCategories[parseInt(category)]);
 
-    this.httpService.get<Advert[]>(environment.apiURL + 'Search/category', {
-      params: params,
+    this.httpService.get<Advert[]>(environment.apiURL + 'Search/category/' + allCategories[parseInt(category)], {
       responseType: 'json'
     }).subscribe({
       next:  (adverts: Advert[]) => {

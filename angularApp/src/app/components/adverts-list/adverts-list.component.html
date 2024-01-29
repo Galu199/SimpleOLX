@@ -25,9 +25,9 @@
      <div *ngFor="let item of adverts" >
        <mat-card-content>
          <mat-card-title>{{item.title}}</mat-card-title>
-         <mat-label> {{item.image}} </mat-label>
-         <mat-label> {{item.description}} </mat-label>
-         <mat-label> {{item.price}} </mat-label>
+         <img [src]="item.image" alt="Thumbnail" class="thumbnail">
+         <mat-label> {{item.description.valueOf()}} </mat-label>
+         <mat-label> {{item.price.valueOf()}} </mat-label>
        </mat-card-content>
      </div>
 

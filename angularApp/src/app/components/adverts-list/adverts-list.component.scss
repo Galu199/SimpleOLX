@@ -34,6 +34,13 @@ p {
   }
 }
 
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  object-fit: cover;
+}
+
 mat-card{
   margin: 30px 150px;
 

@@ -28,22 +28,6 @@ export class StartComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // search() {
-  //   this.searchService.getSearch(this.searchPhrase);
-  //   this.findAdverts = this.searchService.findAdverts;
-  //   // console.log(this.findAdverts);
-  //   // this.searchService.getSearch(this.searchPhrase).subscribe({
-  //   //   next: (adverts: Advert[]) => {
-  //   //       this.findAdverts = adverts;
-  //   //     },
-  //   //     error: (error) => {
-  //   //       console.error('Wystąpił błąd podczas wyszukiwania:', error);
-  //   //     }
-  //   // });
-  //   console.log("this.findAdverts from start component")
-  //   console.log(this.findAdverts)
-  // }
-
   search(){
     console.log("start component search()")
     console.log(this.searchPhrase)
