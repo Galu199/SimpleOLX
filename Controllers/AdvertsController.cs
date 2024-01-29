@@ -25,7 +25,8 @@ namespace SimpleOLX.Controllers
 
 		// GET: api/Adverts
 		[HttpGet]
-		public async Task<ActionResult<List<Advert>>> GetAdverts()
+        [AllowAnonymous]
+        public async Task<ActionResult<List<Advert>>> GetAdverts()
 		{
 			if (_context.Adverts == null)
 			{
@@ -36,6 +37,7 @@ namespace SimpleOLX.Controllers
 
 		// GET: api/Adverts/5
 		[HttpGet("{id}")]
+		[AllowAnonymous]
 		public async Task<ActionResult<Advert>> GetAdvert(int id)
 		{
 			if (_context.Adverts == null)
