@@ -28,19 +28,19 @@
     </mat-card-content>
     </mat-card>
 
-    <!-- Zdjęcia -->
+    <!-- Zdjęcie -->
     <mat-card>
-      <mat-card-title>Zdjęcia</mat-card-title>
+      <mat-card-title>Zdjęcie</mat-card-title>
       <mat-card-content>
 
-        <input type="file" accept="image/*" (change)="selectFiles($event)" multiple>
+        <input type="file" accept="image/*" (change)="selectFiles($event)" >
 
         <div *ngFor="let preview of previews; let i = index">
           <img [src]="preview" alt="Thumbnail" class="thumbnail">
           <button class="remove_btn" type="button" (click)="removeImage(i)">Remove</button>
         </div>
 
-        
+
 
       </mat-card-content>
     </mat-card>

@@ -1,9 +1,8 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { LOCALSTORAGE_TOKEN_KEY } from 'src/app/app.module';
+import {Component, Input, OnInit} from '@angular/core';
 import {SearchService} from "../../services/search/search.service";
 import {AdvertService} from "../../services/advert/advert.service";
-import {Advert} from "../../model/interfaces";
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'start',
@@ -12,27 +11,48 @@ import {Advert} from "../../model/interfaces";
 })
 export class StartComponent implements OnInit {
 
+  @Input('phrase')
   searchPhrase: string = '';
-  findAdverts : Advert[] = [];
+
+  searchGroup = this.formBuilder.group({
+    phrase: [''],
+  });
 
   constructor(
       private router: Router,
       private searchService: SearchService,
-      private advertService: AdvertService
+      private advertService: AdvertService,
+      private formBuilder: FormBuilder
     ) {}
 
   ngOnInit(): void {
   }
 
-  search() {
-    console.log('Wartość wprowadzona:', this.searchPhrase);
-    this.searchService.getSearch(this.searchPhrase);
-    this.findAdverts =this.searchService.findAdverts;
-    console.log(this.findAdverts);
+  // search() {
+  //   this.searchService.getSearch(this.searchPhrase);
+  //   this.findAdverts = this.searchService.findAdverts;
+  //   // console.log(this.findAdverts);
+  //   // this.searchService.getSearch(this.searchPhrase).subscribe({
+  //   //   next: (adverts: Advert[]) => {
+  //   //       this.findAdverts = adverts;
+  //   //     },
+  //   //     error: (error) => {
+  //   //       console.error('Wystąpił błąd podczas wyszukiwania:', error);
+  //   //     }
+  //   // });
+  //   console.log("this.findAdverts from start component")
+  //   console.log(this.findAdverts)
+  // }
+
+  search(){
+    console.log("start component search()")
+    console.log(this.searchPhrase)
+    this.router.navigate(['list', this.searchPhrase]);
   }
 
-  list(){
-    this.router.navigate(['list']);
+  list(category:number){
+    console.log("start component list()")
+    this.router.navigate(['list', category]);
   }
 
 }

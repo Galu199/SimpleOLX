@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'main', component: MainViewComponent },
   { path: 'start', component: StartComponent },
   { path: 'add', component: AddAdvertComponent },
-  { path: 'list', component: AdvertsListComponent },
+  { path: 'list/:search', component: AdvertsListComponent },
+  { path: 'list/:category', component: AdvertsListComponent },
   { path: '**', redirectTo: 'start',pathMatch: 'full' }
 ];
 

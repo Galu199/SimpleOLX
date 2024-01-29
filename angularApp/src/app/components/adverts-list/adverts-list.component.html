@@ -7,7 +7,8 @@
       <mat-label>Znajdź coś dla siebie</mat-label>
       <input matInput placeholder="Szukaj">
     </mat-form-field>
-    <button (click)="search()">
+<!--    <button (click)="search()">-->
+    <button>
       <span> Szukaj </span>
       <mat-icon matSuffix> search </mat-icon>
     </button>
@@ -23,7 +24,10 @@
 
      <div *ngFor="let item of adverts" >
        <mat-card-content>
-         <advert-view> {{item}}</advert-view>
+         <mat-card-title>{{item.title}}</mat-card-title>
+         <mat-label> {{item.image}} </mat-label>
+         <mat-label> {{item.description}} </mat-label>
+         <mat-label> {{item.price}} </mat-label>
        </mat-card-content>
      </div>
 

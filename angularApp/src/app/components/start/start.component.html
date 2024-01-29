@@ -4,44 +4,42 @@
 <!--  Wyszukiwanie-->
 
   <mat-card class="search">
+    <form [formGroup]="searchGroup" (ngSubmit)="search()">
     <mat-form-field appearance="outline">
       <mat-icon matPrefix> search </mat-icon>
       <mat-label>Znajdź coś dla siebie</mat-label>
-      <input matInput placeholder="Szukaj" [(ngModel)]="searchPhrase">
+      <input matInput formControlName="phrase" placeholder="Szukaj" [(ngModel)]="searchPhrase">
     </mat-form-field>
-    <button (click)="search()">
+    <button type="submit">
       <span> Szukaj </span>
       <mat-icon matSuffix> search </mat-icon>
     </button>
+    </form>
   </mat-card>
 
 <!--  Kategorie-->
   <mat-card >
     <mat-card-title>Kategorie główne</mat-card-title>
     <mat-card-content>
-      <button (click)="list()" style="background: lightskyblue;">
-        <mat-icon class="categories"> directions_car </mat-icon>
-        <span> Motoryzajca </span>
+      <button (click)="list(1)" style="background: greenyellow;">
+        <mat-icon class="categories"> directions_run </mat-icon>
+        <span> Sport </span>
       </button>
-      <button (click)="list()" style="background: greenyellow;">
-        <mat-icon class="categories"> home </mat-icon>
-        <span> Dom i ogród </span>
+      <button (click)="list(2)" style="background: yellow;">
+        <mat-icon class="categories"> music_note </mat-icon>
+        <span> Muzyka </span>
       </button>
-      <button (click)="list()" style="background: yellow;">
-        <mat-icon class="categories"> business_center </mat-icon>
-        <span> Praca </span>
-      </button>
-      <button (click)="list()" style="background: mediumpurple;">
+      <button (click)="list(0)" style="background: mediumpurple;">
         <mat-icon class="categories"> personal_video </mat-icon>
         <span> Elektronika </span>
       </button>
-      <button (click)="list()" style="background: pink;">
-        <mat-icon class="categories">shopping_basket</mat-icon>
-        <span> Moda </span>
+      <button (click)="list(3)" style="background: pink;">
+        <mat-icon class="categories">school</mat-icon>
+        <span> Edukacja </span>
       </button>
-      <button (click)="list()" style="background: orange;">
-        <mat-icon class="categories"> pets </mat-icon>
-        <span> Zwierzęta </span>
+      <button (click)="list(4)" style="background: orange;">
+        <mat-icon class="categories"> favorite </mat-icon>
+        <span> Zdrowie </span>
       </button>
     </mat-card-content>
   </mat-card>

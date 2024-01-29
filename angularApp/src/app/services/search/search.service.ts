@@ -3,6 +3,8 @@ import {environment} from "../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
 import { Advert } from '../../model/interfaces';
+import { AdvertCategory, allAdvertsCategories } from 'src/app/model/types';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +18,45 @@ export class SearchService {
 
   }
 
-  getSearch(phraze:string){
-    const params = new HttpParams().set('phraze', phraze);
+  getSearch(phrase:string) {
+    const params = new HttpParams().set('phrase', phrase);
 
     this.httpService.get<Advert[]>(environment.apiURL + 'Search', {
       params: params,
-      responseType: 'json',
-    }).subscribe(
-      (adverts: Advert[]) => {
+      responseType: 'json'
+    }).subscribe({
+      next:  (adverts: Advert[]) => {
         this.findAdverts = adverts;
+        console.log("service: ");
+        console.log(this.findAdverts);
+
       },
-      (error) => {
+      error: (error) => {
         console.error('Wystąpił błąd podczas wyszukiwania:', error);
       }
-    );
+    });
+    console.log('getSearch')
+  }
+
+  getCategoryAdverts(category: string) {
+    let allCategories: AdvertCategory[] = [...allAdvertsCategories]
+    const params = new HttpParams().set('category', allCategories[parseInt(category)]);
+
+    this.httpService.get<Advert[]>(environment.apiURL + 'Search/category', {
+      params: params,
+      responseType: 'json'
+    }).subscribe({
+      next:  (adverts: Advert[]) => {
+        this.findAdverts = adverts;
+        console.log("service: ");
+        console.log(this.findAdverts);
+
+      },
+      error: (error) => {
+        console.error('Wystąpił błąd podczas wyszukiwania:', error);
+      }
+    });
+    console.log('getSearch')
   }
 
 

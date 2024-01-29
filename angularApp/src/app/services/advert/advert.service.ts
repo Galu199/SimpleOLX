@@ -32,14 +32,15 @@ export class AdvertService {
   }
 
   getAdverts() {
-    this.httpService.get<Advert[]>(environment.apiURL + 'Adverts').subscribe(
-      (adverts: Advert[]) => {
-        this.adverts = adverts;
-      },
-      (error) => {
-        console.error('Wystąpił błąd podczas pobierania ogłoszeń: ', error);
-      }
-    );
+    this.httpService.get<Advert[]>(environment.apiURL + 'Adverts').subscribe({
+   next: (adverts: Advert[]) => {
+      this.adverts = adverts;
+      console.log(this.adverts);
+    },
+  error:  (error) => {
+      console.error('Wystąpił błąd podczas pobierania ogłoszeń: ', error);
+    }
+  });
   }
 
   public getOneAdvert( id: number) : Observable<Advert> {
