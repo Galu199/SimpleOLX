@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {SearchService} from "../../services/search/search.service";
-import {Advert} from "../../model/interfaces";
-import {AdvertService} from "../../services/advert/advert.service";
+import {Component, Input, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { AdvertService } from "../../services/advert/advert.service";
+import { Advert } from "../../model/interfaces";
+import {FormBuilder} from "@angular/forms";
+import { AdvertCategory, allAdvertsCategories } from "../../model/types";
 
 @Component({
   selector: 'app-adverts-list',
@@ -11,60 +12,92 @@ import {AdvertService} from "../../services/advert/advert.service";
 })
 export class AdvertsListComponent implements OnInit {
 
-  numberOfAdverts: number =0;
+  numberOfAdverts: number = 0;
+  findAdverts: Advert[] = [];
 
-  findAdverts : Advert[] = [];
-  adverts : Advert[] = [];
-  searchPhrase: string |number| null = '';
+  @Input('phrase')
+  searchPhrase: string | number | null = '';
 
-  constructor( private router: Router,
-               private searchService: SearchService,
-               private advertService: AdvertService,
-               private route: ActivatedRoute
-  ) {
-    this.adverts = this.advertService.getAdvertsList()
-  }
+  searchGroup = this.formBuilder.group({
+    phrase: [''],
+  });
+
+  constructor(
+    private router: Router,
+    private advertService: AdvertService,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.searchPhrase = this.route.snapshot.paramMap.get('search');
-    if(this.searchPhrase === ''){
-      //jeśli nie było szukane wyświetlamy wszytsko
+    if (this.searchPhrase === null) {
+      console.log('Przekazany został null');
+    } else {
+      if (this.searchPhrase === '0' ||
+        this.searchPhrase === '1' ||
+        this.searchPhrase === '2' ||
+        this.searchPhrase === '3' ||
+        this.searchPhrase === '4') {
+        this.search();
+      } else {
+        this.showList();
+      }
+    }
+  }
+
+  showList(){
+    if(typeof this.searchPhrase == 'number'){
       this.advertService.getAdverts();
-      console.log('przekazany został pusty string')
-
     }
-    else if(this.searchPhrase === null) {
-      //było szukane ale nie znaleźliśmy nic
-      console.log('przekazany został null')
-    }
-
-    else{
-      this.search(this.searchPhrase);
-      console.log('przekazane zostało słowo')
-    }
+    this.advertService.adverts$.subscribe((adverts) => {
+      this.findAdverts = adverts;
+      //this.przypisz_adverty(); // Tymczasowe
+      this.numberOfAdverts = this.findAdverts.length;
+      console.log("this.findAdverts from start component");
+      console.log(this.findAdverts);
+    });
 
   }
 
-
-  search(phrase: string) {
-  if(this.searchPhrase === '0' || this.searchPhrase === '1' || this.searchPhrase === '2' || this.searchPhrase === '1'
-      || this.searchPhrase === '4' )   {
-      this.searchService.getCategoryAdverts(this.searchPhrase);
-      console.log(parseInt(this.searchPhrase));
+  search() {
+    if(typeof this.searchPhrase == 'string'){
+      this.advertService.getSearch(this.searchPhrase);
     }
-  else{
-      this.searchService.getSearch(phrase);
-      console.log(this.searchPhrase)
-    }
-    this.findAdverts = this.searchService.findAdverts;
-
-    console.log("this.findAdverts from start component")
-    console.log(this.findAdverts)
+    this.advertService.adverts$.subscribe((adverts) => {
+      this.findAdverts = adverts;
+      //this.przypisz_adverty(); // Tymczasowe
+      this.numberOfAdverts = this.findAdverts.length;
+      console.log("this.findAdverts from start component");
+      console.log(this.findAdverts);
+    });
   }
 
-
-  advert(){
+  advert() {
     this.router.navigate(['start']);
   }
 
+  //Funkcja używana tylko do testów bez backendu
+  przypisz_adverty() {
+    const fileContent = 'To jest zawartość sztucznego pliku.';
+    const blob = new Blob([fileContent], { type: 'text/plain' });
+    let file = new File([blob], 'fakeFile.txt');
+
+    let advert: Advert = {
+      title: "title" ,
+      description: "decription",
+      mail: "string",
+      phoneNumber: "string",
+      price: 100,
+      localizationLatitude: 0,
+      localizationLongitude: 0,
+      category: "Electronics",
+      image: file,
+      userOwnerId: 0
+    };
+
+    this.findAdverts.push(advert);
+    this.findAdverts.push(advert);
+    this.findAdverts.push(advert);
+  }
 }

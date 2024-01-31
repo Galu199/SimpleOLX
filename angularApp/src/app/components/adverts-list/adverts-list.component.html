@@ -1,17 +1,17 @@
 <div>
   <!--  Wyszukiwanie-->
-
   <mat-card class="search">
-    <mat-form-field appearance="outline">
-      <mat-icon matPrefix> search </mat-icon>
-      <mat-label>Znajdź coś dla siebie</mat-label>
-      <input matInput placeholder="Szukaj">
-    </mat-form-field>
-<!--    <button (click)="search()">-->
-    <button>
-      <span> Szukaj </span>
-      <mat-icon matSuffix> search </mat-icon>
-    </button>
+    <form [formGroup]="searchGroup" (ngSubmit)="search()">
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix> search </mat-icon>
+        <mat-label>Znajdź coś dla siebie</mat-label>
+        <input matInput formControlName="phrase" placeholder="Szukaj" [(ngModel)]="searchPhrase">
+      </mat-form-field>
+      <button type="submit">
+        <span> Szukaj </span>
+        <mat-icon matSuffix> search </mat-icon>
+      </button>
+    </form>
   </mat-card>
 
   <mat-card class="list">
@@ -19,17 +19,16 @@
       <span *ngIf="numberOfAdverts===0"> {{numberOfAdverts}} ogłoszeń</span>
       <span *ngIf="numberOfAdverts===1"> {{numberOfAdverts}} ogłoszenie</span>
       <span *ngIf="numberOfAdverts>1 && numberOfAdverts<5"> {{numberOfAdverts}} ogłoszenia</span>
-      <span *ngIf="numberOfAdverts>5">{{numberOfAdverts}} ogłoszeń</span>
+      <span *ngIf="numberOfAdverts>=5">{{numberOfAdverts}} ogłoszeń</span>
     </h2>
 
-     <div *ngFor="let item of adverts" >
-       <mat-card-content>
-         <mat-card-title>{{item.title}}</mat-card-title>
-         <img [src]="item.image" alt="Thumbnail" class="thumbnail">
-         <mat-label> {{item.description.valueOf()}} </mat-label>
-         <mat-label> {{item.price.valueOf()}} </mat-label>
-       </mat-card-content>
-     </div>
-
+    <div *ngFor="let item of findAdverts" (click) ="advert()">
+      <mat-card-content>
+        <mat-card-title>{{item.title}}</mat-card-title>
+        <img [src]="item.image" alt="Thumbnail" class="thumbnail">
+        <mat-label> {{item.description}} </mat-label>
+        <mat-label> {{item.price}} </mat-label>
+      </mat-card-content>
+    </div>
   </mat-card>
 </div>

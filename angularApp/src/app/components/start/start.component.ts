@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
 import {Component, Input, OnInit} from '@angular/core';
-import {SearchService} from "../../services/search/search.service";
 import {AdvertService} from "../../services/advert/advert.service";
 import {FormBuilder, Validators} from "@angular/forms";
 
@@ -20,12 +19,12 @@ export class StartComponent implements OnInit {
 
   constructor(
       private router: Router,
-      private searchService: SearchService,
       private advertService: AdvertService,
       private formBuilder: FormBuilder
     ) {}
 
   ngOnInit(): void {
+    this.advertService.deleteAdvertsFromTable();
   }
 
   search(){
