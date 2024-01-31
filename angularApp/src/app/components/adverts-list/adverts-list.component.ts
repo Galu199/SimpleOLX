@@ -52,7 +52,7 @@ export class AdvertsListComponent implements OnInit {
     }
     this.advertService.adverts$.subscribe((adverts) => {
       this.findAdverts = adverts;
-      //this.przypisz_adverty(); // Tymczasowe
+      this.przypisz_adverty(); // Tymczasowe
       this.numberOfAdverts = this.findAdverts.length;
       console.log("this.findAdverts from start component");
       console.log(this.findAdverts);
@@ -66,7 +66,7 @@ export class AdvertsListComponent implements OnInit {
     }
     this.advertService.adverts$.subscribe((adverts) => {
       this.findAdverts = adverts;
-      //this.przypisz_adverty(); // Tymczasowe
+      this.przypisz_adverty(); // Tymczasowe
       this.numberOfAdverts = this.findAdverts.length;
       console.log("this.findAdverts from start component");
       console.log(this.findAdverts);
@@ -74,7 +74,7 @@ export class AdvertsListComponent implements OnInit {
   }
 
   advert() {
-    this.router.navigate(['start']);
+    this.router.navigate(['advert']);
   }
 
   //Funkcja używana tylko do testów bez backendu

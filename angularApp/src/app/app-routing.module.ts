@@ -6,6 +6,7 @@ import { MainViewComponent } from './components/main-view/main-view.component';
 import { StartComponent } from "./components/start/start.component";
 import {AddAdvertComponent} from "./components/add-advert/add-advert.component";
 import {AdvertsListComponent} from "./components/adverts-list/adverts-list.component";
+import {AdvertViewComponent} from "./components/advert-view/advert-view.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'add', component: AddAdvertComponent },
   { path: 'list/:search', component: AdvertsListComponent },
   { path: 'list/:category', component: AdvertsListComponent },
+  { path: 'advert', component: AdvertViewComponent },
   { path: '**', redirectTo: 'start',pathMatch: 'full' }
 ];
 

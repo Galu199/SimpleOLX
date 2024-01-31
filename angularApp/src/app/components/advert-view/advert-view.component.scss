@@ -1,0 +1,88 @@
+.ad-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 150px;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.ad-details {
+  flex: 2;
+  margin-right: 20px;
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .ad-date {
+    color: #777;
+    margin-bottom: 20px;
+  }
+
+  .ad-images {
+    img {
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+
+  .ad-description {
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+}
+
+.ad-contact {
+  flex: 1;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+}
+
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  object-fit: cover;
+}
+
+button {
+    margin:10px 10px;
+    margin-top: 30px;
+    font-weight: 600;
+    background-color: #002f34;
+    color: white;
+    border-color: #002f34;
+    border-radius: 6px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    height: 50px;
+    width: 200px;
+    cursor: pointer;
+    align-items: center;
+    &:hover {
+      background: white;
+      color: #002f34;
+    }
+}
+

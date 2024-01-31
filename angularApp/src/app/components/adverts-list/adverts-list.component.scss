@@ -6,73 +6,108 @@ p {
 }
 
 
-.search{
+.search {
   display: flex;
   justify-content: center;
-  mat-form-field{
-    width: calc(100vw - 500px);
-    height: 60px;
-    margin-top: 10px;
-  }
-  button {
-    font-weight: 600;
-    background-color: #002f34;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    transition: all 0.2s ease-in-out;
-    height: 60px;
-    width: 100px;
-    cursor: pointer;
-    align-items: center;
-    &:hover {
-      color: #799497;
-    }
+  align-items: center;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 1200px;
+}
+
+.search-input {
+  flex: 3;
+  height: 60px;
+  margin-right: 10px;
+}
+
+.search-button {
+  flex: 1;
+  font-weight: 600;
+  background-color: #002f34;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  height: 60px;
+  width: 100px;
+  cursor: pointer;
+
+  &:hover {
+    color: #799497;
   }
 }
 
 .thumbnail {
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
   margin: 5px;
   object-fit: cover;
 }
 
 mat-card{
   margin: 30px 150px;
+}
 
+.ads-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 1200px;
+  margin: 20px auto;
+}
 
-  mat-card-title,
-  mat-card-content {
-    display: flex;
-    justify-content: center;
+.ad-card {
+  width: calc(100vw - 100px);
+  margin: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: #fff;
 
+  &:hover {
+    transform: scale(1.05);
   }
 
-  button {
-    margin:10px 10px;
-    font-weight: 600;
-    background-color: white;
-    color: #002f34;
-    border-color: #002f34;
-    border-radius: 4px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    transition: all 0.2s ease-in-out;
-    height: 200px;
-    width: 200px;
-    cursor: pointer;
-    align-items: center;
-    &:hover {
-      background: #002f34;
-      color: white;
+  .ad-image {
+    flex: 1;
+    margin-right: 20px;
+    img {
+      max-width: 100%;
+      height: auto;
     }
-    mat-icon{
-      size: 60px;
+  }
+
+  .ad-details {
+    flex: 2;
+    padding: 10px;
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      margin-top: 0;
+    }
+
+    .ad-date {
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .ad-price {
+      font-size: 16px;
+      font-weight: bold;
     }
   }
 }
