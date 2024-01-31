@@ -16,7 +16,7 @@ export class AdvertsListComponent implements OnInit {
   findAdverts: Advert[] = [];
 
   @Input('phrase')
-  searchPhrase: string | number | null = '';
+  searchPhrase: string = '';
 
   searchGroup = this.formBuilder.group({
     phrase: [''],
@@ -30,19 +30,20 @@ export class AdvertsListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.searchPhrase = this.route.snapshot.paramMap.get('search');
-    if (this.searchPhrase === null) {
+    const search = this.route.snapshot.paramMap.get('search');
+    if (search === null) {
       console.log('Przekazany został null');
     } else {
-      if (this.searchPhrase === '0' ||
-        this.searchPhrase === '1' ||
-        this.searchPhrase === '2' ||
-        this.searchPhrase === '3' ||
-        this.searchPhrase === '4') {
-        this.search();
-      } else {
+      if (search === '0' ||
+        search === '1' ||
+        search === '2' ||
+        search === '3' ||
+        search === '4') {
         this.advertService.getAdverts();
         this.showList();
+      } else {
+        this.searchPhrase = search;
+        this.search();
       }
     }
   }
@@ -52,16 +53,16 @@ export class AdvertsListComponent implements OnInit {
       this.findAdverts = adverts;
       //this.przypisz_adverty(); // Tymczasowe
       this.numberOfAdverts = this.findAdverts.length;
-      console.log("this.findAdverts from start component");
+      console.log("this.findAdverts from showList()");
       console.log(this.findAdverts);
     });
 
   }
 
   search() {
-    if(typeof this.searchPhrase == 'string'){
-      this.advertService.getSearch(this.searchPhrase);
-    }
+    this.advertService.deleteAdvertsFromTable();
+    this.advertService.getSearch(this.searchPhrase);
+
     this.advertService.adverts$.subscribe((adverts) => {
       this.findAdverts = adverts;
       //this.przypisz_adverty(); // Tymczasowe
