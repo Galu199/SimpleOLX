@@ -41,18 +41,16 @@ export class AdvertsListComponent implements OnInit {
         this.searchPhrase === '4') {
         this.search();
       } else {
+        this.advertService.getAdverts();
         this.showList();
       }
     }
   }
 
   showList(){
-    if(typeof this.searchPhrase == 'number'){
-      this.advertService.getAdverts();
-    }
     this.advertService.adverts$.subscribe((adverts) => {
       this.findAdverts = adverts;
-      this.przypisz_adverty(); // Tymczasowe
+      //this.przypisz_adverty(); // Tymczasowe
       this.numberOfAdverts = this.findAdverts.length;
       console.log("this.findAdverts from start component");
       console.log(this.findAdverts);
@@ -66,7 +64,7 @@ export class AdvertsListComponent implements OnInit {
     }
     this.advertService.adverts$.subscribe((adverts) => {
       this.findAdverts = adverts;
-      this.przypisz_adverty(); // Tymczasowe
+      //this.przypisz_adverty(); // Tymczasowe
       this.numberOfAdverts = this.findAdverts.length;
       console.log("this.findAdverts from start component");
       console.log(this.findAdverts);
