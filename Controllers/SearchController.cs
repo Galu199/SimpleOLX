@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -10,20 +8,26 @@ using SimpleOLX.Entities.Enums;
 
 namespace SimpleOLX.Controllers
 {
+    /// <summary>
+    /// Searching Controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [AllowAnonymous]
     public class SearchController : ControllerBase
     {
-        private readonly SimpleOLXDbContext _context;
-        private readonly SignInManager<User> _signInManager;
+        private readonly SimpleOLXDbContext _context; // Dostęp do bazy dancyh
 
-        public SearchController(SimpleOLXDbContext context, SignInManager<User> signInManager)
+        public SearchController(SimpleOLXDbContext context)
         {
             _context = context;
-            _signInManager = signInManager;
         }
 
+        /// <summary>
+        /// Searching for Adverts that contains pharse in title, min letters is 3
+        /// </summary>
+        /// <param name="phrase">text that is looked for</param>
+        /// <returns>Ancestor of List of Adverts (can be converted to List)</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Advert>>> GetAdverts(string phrase)
         {
@@ -49,6 +53,11 @@ namespace SimpleOLX.Controllers
             return Ok(adverts);
         }
 
+        /// <summary>
+        /// Serching for Adverts by the category enumerable value
+        /// </summary>
+        /// <param name="category">category</param>
+        /// <returns>List of Adverts (but converted to DTO for front simplicity)</returns>
         [HttpGet("category/{category}")]
         public async Task<ActionResult<List<AdvertDTOz>>> GetAdvertsByCategory(AdvertCategoryEnum category)
         {

@@ -2,6 +2,9 @@
 
 namespace SimpleOLX.Entities
 {
+	/// <summary>
+	/// Model for Adverts used in database
+	/// </summary>
 	public class Advert
 	{
 		public int Id { get; set; }

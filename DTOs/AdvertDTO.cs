@@ -2,6 +2,9 @@
 
 namespace SimpleOLX.DTOs
 {
+	/// <summary>
+	/// Model class for Advert communication
+	/// </summary>
 	public class AdvertDTO
 	{
 		public string Title { get; set; } = "";

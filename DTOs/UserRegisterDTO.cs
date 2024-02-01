@@ -1,5 +1,8 @@
 ﻿namespace SimpleOLX.DTOs
 {
+    /// <summary>
+    /// Model for register purposes
+    /// </summary>
     public class UserRegisterDTO
     {
         public string Email { get; set; } = null!;

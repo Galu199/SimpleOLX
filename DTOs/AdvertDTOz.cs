@@ -2,6 +2,9 @@
 
 namespace SimpleOLX.DTOs
 {
+    /// <summary>
+    /// Model class for Adcert communication (special made for front)
+    /// </summary>
     public class AdvertDTOz
     {
         public int Id { get; set; }

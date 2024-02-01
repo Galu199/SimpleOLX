@@ -2,6 +2,9 @@
 
 namespace SimpleOLX.Entities
 {
+	/// <summary>
+	/// Model of User used in database
+	/// </summary>
 	public class User : IdentityUser<int>
 	{
 		public string FirstName { get; set; }
@@ -9,7 +12,6 @@ namespace SimpleOLX.Entities
 		public DateTime CreationDate { get; set; }
 
 		//Navigation properties
-		//public ICollection<RefreshToken> RefreshTokens { get; set; }
 		public ICollection<Advert> AdvertsOwned { get; set; }
 	}
 }

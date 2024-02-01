@@ -1,30 +1,36 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SimpleOLX.DTOs;
 using SimpleOLX.Entities;
-using SimpleOLX.Entities.Enums;
 using System.Security.Claims;
 
 namespace SimpleOLX.Controllers
 {
-	[Route("api/[controller]")]
+    /// <summary>
+    /// Kontroller Ogłoszeń
+    /// Tutaj są dokonywane działania na ogłoszeniach
+    /// Ogólny dostęp do wszystkich metod jest objęty autoryzacją z wyjątkiem wyznaczonych metod
+    /// </summary>
+    [Route("api/[controller]")]
 	[ApiController]
 	[Authorize]
 	public class AdvertsController : ControllerBase
 	{
-		private readonly SimpleOLXDbContext _context;
-        private readonly SignInManager<User> _signInManager;
+		private readonly SimpleOLXDbContext _context;//Pozwala na dostęp do bazy danych
 
-        public AdvertsController(SimpleOLXDbContext context, SignInManager<User> signInManager)
+		//Konstruktor
+        public AdvertsController(SimpleOLXDbContext context)
 		{
 			_context = context;
-			_signInManager = signInManager;
 		}
 
-		// GET: api/Adverts
-		[HttpGet]
+        /// <summary>
+        /// Pobieranie wszystkich ogłoszeń
+        /// </summary>
+        /// <returns>List of Adverts, or error code</returns>
+        // GET: api/Adverts
+        [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<List<Advert>>> GetAdverts()
 		{
@@ -35,8 +41,13 @@ namespace SimpleOLX.Controllers
 			return await _context.Adverts.ToListAsync();
 		}
 
-		// GET: api/Adverts/5
-		[HttpGet("{id}")]
+        /// <summary>
+        /// Wyszukanie ogłoszenia po ID
+        /// </summary>
+        /// <param name="id"> id </param>
+        /// <returns> Advert, or error code </returns>
+        // GET: api/Adverts/5
+        [HttpGet("{id}")]
 		[AllowAnonymous]
 		public async Task<ActionResult<Advert>> GetAdvert(int id)
 		{
@@ -44,6 +55,7 @@ namespace SimpleOLX.Controllers
 			{
 				return NotFound();
 			}
+
 			var advert = await _context.Adverts.FindAsync(id);
 
 			if (advert == null)
@@ -54,8 +66,13 @@ namespace SimpleOLX.Controllers
 			return advert;
 		}
 
+		/// <summary>
+		/// Edytowanie ogłoszenia po ID
+		/// </summary>
+		/// <param name="id">id</param>
+		/// <param name="advertDTO">object of advertDTO</param>
+		/// <returns> message code </returns>
 		// PUT: api/Adverts/5
-		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 		[HttpPut("{id}")]
 		public async Task<IActionResult> PutAdvert(int id, AdvertDTO advertDTO)
 		{
@@ -63,6 +80,7 @@ namespace SimpleOLX.Controllers
             {
                 return NotFound();
             }
+
             var advert = await _context.Adverts.FindAsync(id);
             if (advert == null) return NotFound();
 
@@ -86,9 +104,13 @@ namespace SimpleOLX.Controllers
 			return NoContent();
 		}
 
-		// POST: api/Adverts
-		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-		[HttpPost]
+        /// <summary>
+        /// Dodawanie ogłoszenia
+        /// </summary>
+        /// <param name="advertDTO">advertDTO object</param>
+        /// <returns> Advert, or error code </returns>
+        // POST: api/Adverts
+        [HttpPost]
 		public async Task<ActionResult<Advert>> PostAdvert(AdvertDTO advertDTO)
 		{
 			if (_context.Adverts == null)
@@ -124,6 +146,11 @@ namespace SimpleOLX.Controllers
             return CreatedAtAction("GetAdvert", new { id = advert.Id }, advert);
 		}
 
+		/// <summary>
+		/// Usuwanie ogłoszenia
+		/// </summary>
+		/// <param name="id">id</param>
+		/// <returns>message code</returns>
 		// DELETE: api/Adverts/5
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteAdvert(int id)
@@ -132,11 +159,13 @@ namespace SimpleOLX.Controllers
 			{
 				return NotFound();
 			}
+
 			var advert = await _context.Adverts.FindAsync(id);
 			if (advert == null)
 			{
 				return NotFound();
 			}
+
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 			if (advert.UserOwnerId.ToString() != userId)
 			{
@@ -149,11 +178,21 @@ namespace SimpleOLX.Controllers
 			return Ok();
 		}
 
+		/// <summary>
+		/// Sprawdza czy ogłoszenie istnieje
+		/// </summary>
+		/// <param name="id"> id </param>
+		/// <returns> true if advert exists, false otherwise </returns>
 		private bool AdvertExists(int id)
 		{
 			return (_context.Adverts?.Any(e => e.Id == id)).GetValueOrDefault();
 		}
 
+		/// <summary>
+		/// Mapowanie AdcertDTO do Advert
+		/// </summary>
+		/// <param name="source">advert DTO as source</param>
+		/// <param name="destination">Advert to put the data</param>
         private void MapAdvertDTOToAdvert(AdvertDTO source, Advert destination)
         {
             destination.Title = source.Title;

@@ -6,6 +6,9 @@ using SimpleOLX.Entities;
 
 namespace SimpleOLX.Services
 {
+    /// <summary>
+    /// TODO
+    /// </summary>
     public class JWTService
     {
         private readonly IConfiguration _configuration;
@@ -15,6 +18,11 @@ namespace SimpleOLX.Services
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="user"> user </param>
+        /// <returns> string </returns>
         public string CreateJWT(User user)
         {
             return new JwtSecurityTokenHandler()

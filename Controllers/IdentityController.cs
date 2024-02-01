@@ -8,26 +8,32 @@ using SimpleOLX.Services;
 
 namespace SimpleOLX.Controllers
 {
+	/// <summary>
+	/// TODO
+	/// </summary>
     [Route("api/[controller]")]
 	[ApiController]
 	public class IdentityController : ControllerBase
 	{
-		private readonly SimpleOLXDbContext _context;
-		private readonly UserManager<User> _userManager;
-		private readonly SignInManager<User> _signInManager;
-        private readonly JWTService _JWTService;
+		private readonly UserManager<User> _userManager; // Domyślmy menager użytkowników
+		private readonly SignInManager<User> _signInManager; // Domyślmy menager logowania entity framework
+        private readonly JWTService _JWTService; //TODO
 
-        public IdentityController(SimpleOLXDbContext context,
+        public IdentityController(
 			UserManager<User> userManager, 
 			SignInManager<User> signInManager,
 			JWTService JWTService)
 		{
-			_context = context;
 			_userManager = userManager;
 			_signInManager = signInManager;
             _JWTService = JWTService;
         }
 
+		/// <summary>
+		/// TODO
+		/// </summary>
+		/// <param name="userRegisterDTO"></param>
+		/// <returns></returns>
         [AllowAnonymous]
         [HttpPost("register")]
 		public async Task<ActionResult> Register(UserRegisterDTO userRegisterDTO)
@@ -52,6 +58,11 @@ namespace SimpleOLX.Controllers
 			return Ok("Account created successfully.");
 		}
 
+		/// <summary>
+		/// TODO
+		/// </summary>
+		/// <param name="userLoginDTO"></param>
+		/// <returns></returns>
 		[AllowAnonymous]
 		[HttpPost("login")]
 		public async Task<ActionResult<string>> Login(UserLoginDTO userLoginDTO)
