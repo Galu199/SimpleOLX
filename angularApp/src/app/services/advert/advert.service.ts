@@ -7,6 +7,10 @@ import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { AdvertCategory, allAdvertsCategories } from "../../model/types";
 
+
+/**
+ * Serwis obsługujący endpointy backendu dotyczące ofert (Adverts) i ich wyszukiwania (Search)
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -20,11 +24,13 @@ export class AdvertService {
     //this.getAdverts();
   }
 
+  //Funkcja zerująca tablicę ofert
   deleteAdvertsFromTable(){
     this.adverts$ = new BehaviorSubject<Advert[]>([])
     console.log('delete form table method')
   }
 
+  //Pobieranie wszytskich ofert dostępnych w serwisie
   getAdverts() {
     this.httpService.get<Advert[]>(environment.apiURL + 'Adverts').pipe(
       tap(adverts => {
@@ -35,6 +41,7 @@ export class AdvertService {
     ).subscribe();
   }
 
+  //Funkcja dodająca nową ofertę
   postAdvert(newAdvert: Advert) {
     return this.httpService.post(environment.apiURL + "Adverts", newAdvert, { responseType: 'text' })
       .pipe(
@@ -43,6 +50,7 @@ export class AdvertService {
       );
   }
 
+  //Funkcja pobierająca dane oferty o podanym id
   public getOneAdvert(id: number): Observable<Advert> {
     return this.httpService.get<Advert>(environment.apiURL + 'Adverts/' + id)
       .pipe(
@@ -50,6 +58,7 @@ export class AdvertService {
       );
   }
 
+  //Funkcja pobierająca tablicę ofert, które pasują do podanej frazy
   getSearch(phrase: string) {
     const params = new HttpParams().set('phrase', phrase);
 
@@ -66,6 +75,7 @@ export class AdvertService {
     ).subscribe();
   }
 
+  //Funkcja pobierająca tablicę ofert z danej kategorii
   getCategoryAdverts(category: string) {
     let allCategories: AdvertCategory[] = [...allAdvertsCategories];
     const params = new HttpParams().set('category', allCategories[parseInt(category)]);
@@ -82,6 +92,7 @@ export class AdvertService {
     ).subscribe();
   }
 
+  //Funkcja do obsługi wyjątków
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

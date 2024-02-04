@@ -5,6 +5,9 @@ import { AuthService } from '../../services/auth-service/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import {MainViewComponent} from "../main-view/main-view.component";
 
+/**
+ * Klasa obsługująca widok logowania
+ */
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',

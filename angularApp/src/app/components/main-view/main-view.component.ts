@@ -2,6 +2,9 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {LOCALSTORAGE_TOKEN_KEY} from "../../app.module";
 
+/**
+ * Klasa głównego widoku - pasek górny, przyciks logowania, dodawania ogłosenia, tło, miejsce na zawartość
+ */
 @Component({
   selector: 'main-view',
   templateUrl: './main-view.component.html',

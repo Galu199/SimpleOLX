@@ -3,8 +3,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AdvertService } from "../../services/advert/advert.service";
 import { Advert } from "../../model/interfaces";
 import {FormBuilder} from "@angular/forms";
-import { AdvertCategory, allAdvertsCategories } from "../../model/types";
 
+/**
+ * Klasa do wyświetlania listy ofert z danej kategorii lub po wprowadzeniu słowa kluczowego w wyszukiwarce
+ */
 @Component({
   selector: 'app-adverts-list',
   templateUrl: './adverts-list.component.html',
@@ -48,10 +50,11 @@ export class AdvertsListComponent implements OnInit {
     }
   }
 
+  //Funkcja do wyświetlania listy ofert z danej kategorii
   showList(){
     this.advertService.adverts$.subscribe((adverts) => {
       this.findAdverts = adverts;
-      //this.przypisz_adverty(); // Tymczasowe
+      this.przypisz_adverty(); // Tymczasowe
       this.numberOfAdverts = this.findAdverts.length;
       console.log("this.findAdverts from showList()");
       console.log(this.findAdverts);
@@ -59,19 +62,21 @@ export class AdvertsListComponent implements OnInit {
 
   }
 
+  //Funkcja do wyświetlania listy ofert z po wpisanu słowa kluczowego w wyszukiwarke
   search() {
     this.advertService.deleteAdvertsFromTable();
     this.advertService.getSearch(this.searchPhrase);
 
     this.advertService.adverts$.subscribe((adverts) => {
       this.findAdverts = adverts;
-      //this.przypisz_adverty(); // Tymczasowe
+      this.przypisz_adverty(); // Tymczasowe
       this.numberOfAdverts = this.findAdverts.length;
       console.log("this.findAdverts from start component");
       console.log(this.findAdverts);
     });
   }
 
+  //Funkcja przekierowująca do widoku konkretnej oferty
   advert() {
     this.router.navigate(['advert']);
   }
@@ -88,8 +93,8 @@ export class AdvertsListComponent implements OnInit {
       mail: "string",
       phoneNumber: "string",
       price: 100,
-      localizationLatitude: 0,
-      localizationLongitude: 0,
+      localizationLatitude: 1300,
+      localizationLongitude: 1000,
       category: "Electronics",
       image: file,
       userOwnerId: 0

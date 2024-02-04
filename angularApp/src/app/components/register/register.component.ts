@@ -6,6 +6,10 @@ import { CustomValidators } from '../../model/custom-validator';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { Router } from '@angular/router';
 
+
+/**
+ * Klasa obsługująca widok logowania
+ */
 @Component({
   selector: 'register',
   templateUrl: './register.component.html',
@@ -31,12 +35,12 @@ export class RegisterComponent {
 
   public onRegister(): void {
     if (!this.registerForm.valid) return;
-    
+
     this.registerForm.removeControl('passwordConfirm');
     this.authService.register(this.registerForm.value).subscribe({
       next: (value: string) => {
         this.snackBar.open(value, 'Close', { duration: 2000, horizontalPosition: 'right', verticalPosition: 'top' })
-        this.router.navigate(['../login']); 
+        this.router.navigate(['../login']);
       },
       error: (err: HttpErrorResponse) => { console.log(err.message); }
     });

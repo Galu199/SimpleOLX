@@ -3,6 +3,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AdvertService} from "../../services/advert/advert.service";
 import {FormBuilder, Validators} from "@angular/forms";
 
+/**
+ * Klasa obsługująca główny widok - kategorii i wyszukiwania
+ */
 @Component({
   selector: 'start',
   templateUrl: './start.component.html',
@@ -27,12 +30,14 @@ export class StartComponent implements OnInit {
     this.advertService.deleteAdvertsFromTable();
   }
 
+  //Funkcja kierująca do wyszukiwanie ofert
   search(){
     console.log("start component search()")
     console.log(this.searchPhrase)
     this.router.navigate(['list', this.searchPhrase]);
   }
 
+  //Funkcja kierująca do listy ofert z danej kategorii
   list(category:number){
     console.log("start component list()")
     this.router.navigate(['list', category]);

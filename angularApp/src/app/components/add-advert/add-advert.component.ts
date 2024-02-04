@@ -7,6 +7,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdvertCategory, allAdvertsCategories } from 'src/app/model/types';
 
+/**
+ * Klasa do obsługi dodawania nowych ofert w serwisie
+ */
 @Component({
   selector: 'app-add-advert',
   templateUrl: './add-advert.component.html',
@@ -41,7 +44,7 @@ export class AddAdvertComponent implements OnInit {
   // Function to handle file input change
   selectFiles(event: any): void {
     this.selectedFiles = event.target.files
-    
+
     if (this.selectedFiles && this.selectedFiles[0]) {
       const numberOfFiles = this.selectedFiles.length
 
@@ -55,23 +58,13 @@ export class AddAdvertComponent implements OnInit {
         this.selectedFileNames.push(this.selectedFiles[i].name);
       }
     }
-    //this.updateThumbnailDisplay();
   }
 
   // Function to remove a selected image
   removeImage(index: number): void {
     this.previews.splice(index, 1);
     this.selectedFileNames.splice(index, 1);
-
-    // Update display after removal
-    //this.updateThumbnailDisplay();
   }
-
-  // Function to update thumbnail display
-  //private updateThumbnailDisplay(): void {
-    //const imageUrls: string[] = this.selectedFileNames.map(image => window.URL.createObjectURL(image));
-    //this.addAdvert.patchValue({ images: this.selectedFileNames }); // Update form control with image URLs
-  //}
 
   add() {
     const advert: Advert = {
